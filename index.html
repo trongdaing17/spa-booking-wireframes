@@ -125,6 +125,31 @@
     </div>
     <p class="text-slate-600 text-sm mb-6">Mobile-first webapp standalone (không native, không nhúng app sẵn có). Consume Time Slot Public API. Khách self-book qua trình duyệt điện thoại.</p>
 
+    <div class="mb-6 bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm">
+      <div class="font-semibold text-amber-900 mb-2">📍 Entry points — khách lấy link booking ở đâu?</div>
+      <div class="grid grid-cols-2 gap-3 text-xs text-amber-900">
+        <div class="bg-white rounded p-2 border border-amber-200">
+          <div class="font-semibold mb-1">📱 QR code (kênh chính Phase 1)</div>
+          <div class="text-slate-600">In tại quầy lễ tân, trong phòng KS, brochure spa. Scan → mở <code>spa.vinpearl.com/?outlet=long-beach</code> (param outlet pre-select)</div>
+        </div>
+        <div class="bg-white rounded p-2 border border-amber-200">
+          <div class="font-semibold mb-1">🤵 Concierge / lễ tân share</div>
+          <div class="text-slate-600">Gửi link qua Zalo/chat/email khi khách hỏi. Marketing chuẩn bị template link sẵn</div>
+        </div>
+        <div class="bg-white rounded p-2 border border-amber-200">
+          <div class="font-semibold mb-1">🏨 Partner deeplink <span class="new-badge ml-1">BR-12</span></div>
+          <div class="text-slate-600">App khách sạn nội bộ / concierge software → button "Đặt spa" → deeplink mở webapp (consume Partner API)</div>
+        </div>
+        <div class="bg-white rounded p-2 border border-amber-200">
+          <div class="font-semibold mb-1">✉ Email cancel link <span class="new-badge ml-1">BR-13</span></div>
+          <div class="text-slate-600">Returning flow — link trong email Confirmed dẫn về cancellation page (không phải first-booking entry)</div>
+        </div>
+      </div>
+      <div class="mt-3 text-[11px] text-amber-800">
+        ℹ Phase 1 KHÔNG cần SEO / Google search (defer Phase 3). KHÔNG cần native app (defer). Webapp chỉ accessed qua các channel trên.
+      </div>
+    </div>
+
     <div class="scroll-wrap">
 
       <!-- A1: Outlet selection -->
@@ -404,9 +429,12 @@
                 <div class="flex justify-between"><span class="text-slate-500">Total</span><span class="font-bold">1,200,000 ₫</span></div>
               </div>
             </div>
-            <div class="bg-white border border-slate-200 rounded-xl p-4 mb-4">
-              <div class="text-xs text-slate-500 mb-2">Show this QR at reception</div>
-              <div class="bg-slate-900 w-32 h-32 mx-auto rounded-lg flex items-center justify-center text-white text-xs">[QR CODE]</div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4 text-center">
+              <div class="text-xs text-slate-500 mb-2">📋 At reception, give one of these</div>
+              <div class="font-mono text-lg font-bold tracking-wide">SP-2026-001234</div>
+              <div class="text-[10px] text-slate-500 mt-1">— or —</div>
+              <div class="text-sm">+84 912 345 678</div>
+              <div class="text-[10px] text-slate-500 mt-2">Staff will find your booking on Calendar</div>
             </div>
             <button class="border border-slate-300 rounded-lg w-full py-2 text-sm font-semibold mb-2">📅 Add to Calendar</button>
             <button class="border border-rose-300 text-rose-600 rounded-lg w-full py-2 text-sm font-semibold">Cancel booking →</button>
@@ -414,7 +442,7 @@
           </div>
         </div>
         <div class="text-center mt-2 text-xs font-semibold">A7 · Confirmed</div>
-        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-13</span> Customer Self-Cancellation — entry point #2: link trong email Confirmed (<span class="new-badge">BR-09</span>) sau khi đã đóng webapp. Cùng dẫn về A8.</p>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-13</span> Customer Self-Cancellation — entry point #2: link trong email Confirmed (<span class="new-badge">BR-09</span>) sau khi đã đóng webapp. Cùng dẫn về A8. <strong>Đã bỏ QR code</strong> — Phase 1 không có scanner integration ở reception; staff tra booking bằng ID hoặc SĐT trực tiếp trên Calendar.</p>
       </div>
 
       <!-- A8: Cancellation page (NEW) -->
