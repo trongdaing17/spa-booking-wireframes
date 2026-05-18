@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<title>Time Slot Enhancement + Spa Booking Webapp — Wireframes (Lo-fi)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
+  .annotation { background: #fef4a8; color: #5a4a2a; padding: 6px 10px; border-radius: 6px; font-size: 12px; }
+  .new-badge { background: #2563eb; color:#fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: .3px; }
+  .existing-badge { background: #64748b; color:#fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: .3px; }
+  .step-tag { background: #11202E; color: #fff; padding: 3px 9px; border-radius: 999px;
+              font-size: 11px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .phone {
+    width: 375px;
+    border: 8px solid #1f2937;
+    border-radius: 32px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 12px 24px -8px rgba(0,0,0,.15);
+  }
+  .phone-statusbar {
+    background: #f8fafc;
+    padding: 6px 16px;
+    font-size: 10px;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .phone-body { height: 680px; overflow-y: auto; }
+  .desktop {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px -8px rgba(0,0,0,.15);
+  }
+  .desktop-titlebar {
+    background: #1e293b;
+    color: #cbd5e1;
+    padding: 8px 16px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .scroll-wrap { display: flex; gap: 32px; overflow-x: auto; padding: 12px 4px 24px; }
+  .ts-sidebar { background: #fff; border-right: 1px solid #e2e8f0; width: 200px; padding: 12px 0; font-size: 13px; }
+  .ts-sidebar a { display: flex; align-items: center; gap: 8px; padding: 8px 16px; color: #475569; }
+  .ts-sidebar a.active { color: #dc2626; font-weight: 600; }
+  .ts-page-bg { background: #f1f5f9; padding: 16px; }
+  .ts-header { background: #f1f5f9; padding: 10px 16px; font-size: 12px; color: #64748b; }
+  .ts-filter-row { display: flex; gap: 12px; padding: 12px 16px; background: #fff; border-bottom: 1px solid #e2e8f0; align-items: center; flex-wrap: wrap; }
+  .ts-cal-grid { display: grid; grid-template-columns: 60px repeat(7, 1fr); border-top: 1px solid #e2e8f0; }
+  .ts-cal-head { padding: 8px 4px; text-align: center; font-size: 12px; color: #475569; border-bottom: 1px solid #e2e8f0; border-right: 1px solid #f1f5f9; }
+  .ts-cal-time { padding: 6px 4px; text-align: right; font-size: 11px; color: #64748b; border-bottom: 1px solid #f1f5f9; }
+  .ts-cal-cell { border-bottom: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; min-height: 28px; position: relative; }
+  .ts-cal-cell.today-line { background: linear-gradient(to bottom, transparent 50%, #60a5fa 50%, #60a5fa 51%, transparent 51%); }
+  .res-block { position: absolute; left: 2px; right: 2px; border-radius: 4px; padding: 3px 5px; font-size: 10px; line-height: 1.2; cursor: pointer; border-left: 3px solid; overflow: hidden; }
+  .fab { position: absolute; bottom: 16px; right: 16px; width: 44px; height: 44px; background: #2563eb; border-radius: 50%; color:#fff; font-size: 22px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+  details > summary { cursor: pointer; }
+</style>
+</head>
+<body class="bg-slate-100 text-slate-900">
+
+<header class="bg-slate-900 text-white px-6 py-4 sticky top-0 z-10">
+  <div class="max-w-7xl mx-auto flex items-center gap-4 flex-wrap">
+    <span class="font-semibold text-lg">Time Slot Enhancement + Spa Booking Webapp</span>
+    <span class="text-xs text-slate-400">Lo-fi · 2026-05-18 · Based on BRD v0.4</span>
+    <nav class="ml-auto flex gap-4 text-sm text-slate-300">
+      <a href="#section-a" class="hover:text-white">A · Customer webapp</a>
+      <a href="#section-b" class="hover:text-white">B · Staff Time Slot</a>
+      <a href="#section-c" class="hover:text-white">C · Configuration</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-8 space-y-16">
+
+  <!-- INTRO -->
+  <section class="bg-white rounded-xl border border-slate-200 p-6">
+    <h1 class="text-2xl font-bold mb-2">Wireframe — Phase 1</h1>
+    <p class="text-slate-600 text-sm mb-4">Phase 1 = <strong>enhance Time Slot module hiện có</strong> + build webapp + Public API. Wireframe phân biệt rõ phần <span class="existing-badge">EXISTING</span> (đã có) và <span class="new-badge">NEW</span> (Phase 1 bổ sung) để stakeholder/dev hiểu scope thật.</p>
+    <div class="grid grid-cols-3 gap-4 text-sm">
+      <div class="border border-slate-200 rounded-lg p-3">
+        <div class="step-tag inline-block mb-2">Section A</div>
+        <div class="font-semibold">Customer mobile webapp <span class="new-badge ml-2">NEW</span></div>
+        <div class="text-slate-500 text-xs mt-1">BR-06, BR-07, BR-09, BR-11, BR-13 · 8 screens</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-3">
+        <div class="step-tag inline-block mb-2">Section B</div>
+        <div class="font-semibold">Staff Time Slot <span class="existing-badge ml-1">EXISTING</span><span class="new-badge ml-1">enhance</span></div>
+        <div class="text-slate-500 text-xs mt-1">BR-03, BR-05, BR-08, BR-10 · 6 screens</div>
+      </div>
+      <div class="border border-slate-200 rounded-lg p-3">
+        <div class="step-tag inline-block mb-2">Section C</div>
+        <div class="font-semibold">Configuration <span class="existing-badge ml-1">EXISTING</span><span class="new-badge ml-1">enhance</span></div>
+        <div class="text-slate-500 text-xs mt-1">BR-01, BR-02, BR-11 · 4 screens</div>
+      </div>
+    </div>
+
+    <div class="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900">
+      <strong>Status legend</strong> — 5 status hiện có của Time Slot, Phase 1 không thêm mới:
+      <span class="ml-2 inline-block px-2 py-0.5 rounded bg-amber-200 text-amber-900">Reserved</span>
+      <span class="inline-block px-2 py-0.5 rounded bg-blue-200 text-blue-900">Confirmed</span>
+      <span class="inline-block px-2 py-0.5 rounded bg-emerald-300 text-emerald-900">Completed</span>
+      <span class="inline-block px-2 py-0.5 rounded bg-slate-300 text-slate-900">Cancelled</span>
+      <span class="inline-block px-2 py-0.5 rounded bg-red-200 text-red-900">No-show</span>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION A — CUSTOMER MOBILE WEBAPP -->
+  <!-- ============================================================ -->
+  <section id="section-a">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="step-tag">Section A</span>
+      <h2 class="text-xl font-semibold">Customer Mobile Webapp</h2>
+      <span class="new-badge">ALL NEW</span>
+    </div>
+    <p class="text-slate-600 text-sm mb-6">Mobile-first webapp standalone (không native, không nhúng app sẵn có). Consume Time Slot Public API. Khách self-book qua trình duyệt điện thoại.</p>
+
+    <div class="scroll-wrap">
+
+      <!-- A1: Outlet selection -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>9:41</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="text-xl">☰</div>
+              <div class="font-bold flex-1">Vinpearl Spa</div>
+              <div class="text-xs text-slate-500">VI ▾</div>
+            </div>
+            <h2 class="text-lg font-bold mb-1">Choose your spa</h2>
+            <p class="text-sm text-slate-500 mb-4">Select an outlet to view services</p>
+
+            <div class="space-y-3">
+              <div class="border border-slate-200 rounded-xl p-3 hover:border-slate-900 cursor-pointer">
+                <div class="bg-slate-200 h-24 rounded-lg mb-2"></div>
+                <div class="font-semibold text-sm">Vinpearl Resort và Spa Long Beach</div>
+                <div class="text-xs text-slate-500">Open today · 09:00–22:00</div>
+              </div>
+              <div class="border border-slate-200 rounded-xl p-3">
+                <div class="bg-slate-200 h-24 rounded-lg mb-2"></div>
+                <div class="font-semibold text-sm">Vinpearl Spa Phú Quốc</div>
+                <div class="text-xs text-slate-500">Open today · 10:00–22:00</div>
+              </div>
+              <div class="border border-slate-200 rounded-xl p-3">
+                <div class="bg-slate-200 h-24 rounded-lg mb-2"></div>
+                <div class="font-semibold text-sm">Vinpearl Spa Hạ Long</div>
+                <div class="text-xs text-slate-500">Open today · 09:00–21:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A1 · Outlet selection</div>
+      </div>
+
+      <!-- A2: Service catalog with PRICE -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>9:42</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <div>←</div>
+              <div class="font-bold flex-1 text-sm">Long Beach Resort</div>
+            </div>
+            <input class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mb-3" placeholder="Search service…"/>
+            <div class="flex gap-2 mb-3 overflow-x-auto text-xs">
+              <button class="bg-slate-900 text-white rounded-full px-3 py-1 whitespace-nowrap">All</button>
+              <button class="border border-slate-300 rounded-full px-3 py-1 whitespace-nowrap">Massage</button>
+              <button class="border border-slate-300 rounded-full px-3 py-1 whitespace-nowrap">Facial</button>
+              <button class="border border-slate-300 rounded-full px-3 py-1 whitespace-nowrap">Combo</button>
+            </div>
+
+            <div class="space-y-3">
+              <div class="border border-slate-200 rounded-xl p-3 flex gap-3">
+                <div class="bg-slate-200 w-16 h-16 rounded-lg flex-shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-sm">Traditional Massage 60'</div>
+                  <div class="text-xs text-slate-500">60 min · Massage</div>
+                  <div class="text-sm font-bold mt-1 text-slate-900">1,200,000 ₫</div>
+                </div>
+              </div>
+              <div class="border border-slate-200 rounded-xl p-3 flex gap-3">
+                <div class="bg-slate-200 w-16 h-16 rounded-lg flex-shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-sm">Hot Stone Massage</div>
+                  <div class="text-xs text-slate-500">45 min · Massage</div>
+                  <div class="text-sm font-bold mt-1">1,500,000 ₫</div>
+                </div>
+              </div>
+              <div class="border border-slate-200 rounded-xl p-3 flex gap-3">
+                <div class="bg-slate-200 w-16 h-16 rounded-lg flex-shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-sm">Pearl Bliss Ritual</div>
+                  <div class="text-xs text-slate-500">120 min · Combo</div>
+                  <div class="text-sm font-bold mt-1">3,800,000 ₫</div>
+                </div>
+              </div>
+              <div class="border border-slate-200 rounded-xl p-3 flex gap-3 opacity-50">
+                <div class="bg-slate-200 w-16 h-16 rounded-lg flex-shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-sm">Foot Massage 15'</div>
+                  <div class="text-xs text-slate-500">15 min · Massage</div>
+                  <div class="text-sm font-bold mt-1">400,000 ₫</div>
+                  <div class="text-xs text-amber-600 mt-1">Fully booked today</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 mt-3 text-center">All prices include VAT</div>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A2 · Catalog + PRICE</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">NEW BR-11</span> Pricing Configuration — Price hiển thị prominent là yêu cầu cốt lõi mở self-booking. VAT inclusive note ở footer (config trong product).</p>
+      </div>
+
+      <!-- A3: Slot selection -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>9:43</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <div>←</div>
+              <div class="font-bold flex-1 text-sm">Traditional Massage 60'</div>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg p-3 mb-4">
+              <div class="text-xs text-slate-500">Service</div>
+              <div class="font-semibold">Traditional Massage 60'</div>
+              <div class="flex justify-between mt-1">
+                <span class="text-xs text-slate-500">60 min</span>
+                <span class="font-bold">1,200,000 ₫</span>
+              </div>
+            </div>
+
+            <div class="text-sm font-semibold mb-2">Choose date</div>
+            <div class="flex gap-2 overflow-x-auto mb-4">
+              <div class="border border-slate-300 rounded-lg p-2 text-center min-w-[60px]"><div class="text-xs text-slate-500">Mon</div><div class="font-bold">18</div></div>
+              <div class="bg-slate-900 text-white rounded-lg p-2 text-center min-w-[60px]"><div class="text-xs opacity-70">Tue</div><div class="font-bold">19</div></div>
+              <div class="border border-slate-300 rounded-lg p-2 text-center min-w-[60px]"><div class="text-xs text-slate-500">Wed</div><div class="font-bold">20</div></div>
+              <div class="border border-slate-300 rounded-lg p-2 text-center min-w-[60px]"><div class="text-xs text-slate-500">Thu</div><div class="font-bold">21</div></div>
+              <div class="border border-slate-300 rounded-lg p-2 text-center min-w-[60px]"><div class="text-xs text-slate-500">Fri</div><div class="font-bold">22</div></div>
+            </div>
+
+            <div class="text-sm font-semibold mb-2">Available slots</div>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">09:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">10:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm bg-slate-100 text-slate-400 line-through">11:00</button>
+              <button class="bg-slate-900 text-white rounded-lg py-2 text-sm">14:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">15:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">17:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">18:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">19:00</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm">20:00</button>
+            </div>
+
+            <div class="text-sm font-semibold mb-2">Therapist (optional)</div>
+            <select class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mb-4">
+              <option>Any available</option>
+              <option>Ann (S002)</option>
+              <option>Kim (S001)</option>
+            </select>
+
+            <button class="w-full bg-slate-900 text-white rounded-lg py-3 font-semibold">Continue</button>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A3 · Slot + therapist</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-03</span> Reservation Multi-Resource — availability tính trên cả equipment + therapist requirement (<span class="new-badge">BR-02</span> Product–Resource Mapping). Slot disabled khi 1 trong các resource type required không có.</p>
+      </div>
+
+      <!-- A4: Guest form -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>9:44</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="flex items-center gap-2 mb-3"><div>←</div><div class="font-bold flex-1 text-sm">Your details</div></div>
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-xs">
+              <div class="font-semibold text-amber-800">⏱ Slot held for 09:42 min</div>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-3 mb-4 text-xs">
+              <div class="flex justify-between"><span class="text-slate-500">Service</span><span class="font-semibold">Traditional Massage 60'</span></div>
+              <div class="flex justify-between mt-1"><span class="text-slate-500">When</span><span class="font-semibold">19/05 · 14:00</span></div>
+              <div class="flex justify-between mt-1"><span class="text-slate-500">Therapist</span><span>Any</span></div>
+              <div class="flex justify-between mt-1"><span class="text-slate-500">Total</span><span class="font-bold">1,200,000 ₫</span></div>
+            </div>
+
+            <label class="text-xs font-semibold">Full name *</label>
+            <input class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mb-3 mt-1" placeholder="Nguyễn Văn A"/>
+            <label class="text-xs font-semibold">Phone number *</label>
+            <div class="flex gap-2 mb-3 mt-1">
+              <select class="border border-slate-300 rounded-lg px-2 text-sm w-20"><option>+84</option></select>
+              <input class="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm" placeholder="912 345 678"/>
+            </div>
+            <label class="text-xs font-semibold">Email *</label>
+            <input class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mb-3 mt-1" placeholder="you@email.com"/>
+
+            <div class="bg-slate-50 rounded-lg p-3 mb-4">
+              <label class="flex items-center gap-2 text-xs">
+                <input type="checkbox" checked/>
+                <span class="font-semibold">I'm an in-house guest</span>
+              </label>
+              <input class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs mt-2" placeholder="Room number (e.g. 1208)" value="1208"/>
+              <div class="text-[10px] text-slate-500 mt-1">In-house guests can pay via Room Charge at the spa</div>
+            </div>
+
+            <button class="w-full bg-slate-900 text-white rounded-lg py-3 font-semibold">Send OTP</button>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A4 · Guest form</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="existing-badge">EXISTING</span> In-house toggle theo Time Slot Add Reservation hiện có. Unlocks Room Charge payment method (<span class="new-badge">BR-08</span> Payment Pay at spa).</p>
+      </div>
+
+      <!-- A5: OTP -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>9:44</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="flex items-center gap-2 mb-6"><div>←</div><div class="font-bold flex-1 text-sm">Verify phone</div></div>
+            <div class="text-center mb-6">
+              <div class="text-4xl mb-3">📱</div>
+              <div class="font-semibold mb-1">Enter verification code</div>
+              <div class="text-xs text-slate-500">Sent to <strong>+84 912 345 678</strong></div>
+            </div>
+            <div class="flex justify-center gap-2 mb-6">
+              <input class="w-10 h-12 border border-slate-300 rounded-lg text-center font-bold text-lg" value="1"/>
+              <input class="w-10 h-12 border border-slate-300 rounded-lg text-center font-bold text-lg" value="2"/>
+              <input class="w-10 h-12 border border-slate-900 rounded-lg text-center font-bold text-lg" value="3"/>
+              <input class="w-10 h-12 border border-slate-300 rounded-lg text-center font-bold text-lg"/>
+              <input class="w-10 h-12 border border-slate-300 rounded-lg text-center font-bold text-lg"/>
+              <input class="w-10 h-12 border border-slate-300 rounded-lg text-center font-bold text-lg"/>
+            </div>
+            <button class="w-full bg-slate-900 text-white rounded-lg py-3 font-semibold mb-3">Verify &amp; confirm booking</button>
+            <div class="text-center text-xs text-slate-500">Didn't receive it? <a class="underline">Resend in 0:47</a></div>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A5 · OTP verify</div>
+      </div>
+
+      <!-- A6: Booking received (Reserved) -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>9:45</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="text-center mb-6 mt-4">
+              <div class="w-16 h-16 bg-amber-100 rounded-full mx-auto flex items-center justify-center text-3xl mb-3">⏳</div>
+              <div class="font-bold text-lg">Booking received</div>
+              <div class="text-xs text-slate-500 mt-1">Awaiting spa staff confirmation</div>
+              <div class="text-[10px] mt-2"><span class="bg-amber-200 text-amber-900 rounded px-2 py-0.5">Status: Reserved</span></div>
+            </div>
+            <div class="border border-slate-200 rounded-xl p-4 mb-4">
+              <div class="text-xs text-slate-500 mb-1">Booking ID</div>
+              <div class="font-bold text-lg mb-3">SP-2026-001234</div>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between"><span class="text-slate-500">Service</span><span class="font-semibold">Traditional Massage 60'</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">When</span><span class="font-semibold">19/05 · 14:00</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Room</span><span>1208</span></div>
+              </div>
+              <div class="border-t border-slate-200 mt-3 pt-3 flex justify-between">
+                <span class="font-semibold">Total</span><span class="font-bold">1,200,000 ₫</span>
+              </div>
+              <div class="bg-slate-100 rounded-lg p-2 mt-2 text-xs">
+                💵 <strong>Pay at spa</strong> · Cash or Room Charge
+              </div>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-xs text-blue-900">
+              📧 Email "Booking received" sent to <strong>you@email.com</strong>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-2">
+              <button class="border border-slate-300 rounded-lg py-2 text-sm font-semibold">📅 Add to Calendar</button>
+              <button class="border border-slate-300 rounded-lg py-2 text-sm font-semibold">View directions</button>
+            </div>
+            <button class="border border-rose-300 text-rose-600 rounded-lg w-full py-2 text-sm font-semibold">Cancel booking →</button>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A6 · Reserved (received)</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-13</span> Customer Self-Cancellation — entry point #1: nút cancel cùng session, không bắt khách quay lại email. Cùng dẫn về A8.</p>
+      </div>
+
+      <!-- A7: CONFIRMED with cancel link -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>11:20</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="text-center mb-6 mt-4">
+              <div class="w-16 h-16 bg-emerald-100 rounded-full mx-auto flex items-center justify-center text-3xl mb-3">✓</div>
+              <div class="font-bold text-lg text-emerald-700">Booking confirmed</div>
+              <div class="text-xs text-slate-500 mt-1">See you at the spa!</div>
+            </div>
+            <div class="border border-emerald-200 bg-emerald-50 rounded-xl p-4 mb-4">
+              <div class="text-xs text-slate-500 mb-1">Booking ID</div>
+              <div class="font-bold text-lg mb-3">SP-2026-001234</div>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between"><span class="text-slate-500">When</span><span class="font-semibold">19/05 · 14:00</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Therapist</span><span class="font-semibold">Ann (S002)</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Total</span><span class="font-bold">1,200,000 ₫</span></div>
+              </div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-xl p-4 mb-4">
+              <div class="text-xs text-slate-500 mb-2">Show this QR at reception</div>
+              <div class="bg-slate-900 w-32 h-32 mx-auto rounded-lg flex items-center justify-center text-white text-xs">[QR CODE]</div>
+            </div>
+            <button class="border border-slate-300 rounded-lg w-full py-2 text-sm font-semibold mb-2">📅 Add to Calendar</button>
+            <button class="border border-rose-300 text-rose-600 rounded-lg w-full py-2 text-sm font-semibold">Cancel booking →</button>
+            <div class="text-[10px] text-slate-500 mt-2 text-center">Free cancellation up to 2 hours before slot</div>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A7 · Confirmed</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-13</span> Customer Self-Cancellation — entry point #2: link trong email Confirmed (<span class="new-badge">BR-09</span>) sau khi đã đóng webapp. Cùng dẫn về A8.</p>
+      </div>
+
+      <!-- A8: Cancellation page (NEW) -->
+      <div>
+        <div class="phone">
+          <div class="phone-statusbar"><span>11:30</span><span>● ● ●</span></div>
+          <div class="phone-body p-4">
+            <div class="flex items-center gap-2 mb-4"><div>←</div><div class="font-bold flex-1 text-sm">Cancel booking</div></div>
+
+            <div class="bg-rose-50 border border-rose-200 rounded-lg p-3 mb-4 text-xs">
+              <div class="font-semibold text-rose-800">⚠ Cancel SP-2026-001234?</div>
+              <div class="text-rose-700 mt-1">Traditional Massage 60' · 19/05 14:00</div>
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-4 text-xs text-emerald-800">
+              ✓ <strong>Free cancellation</strong> — Slot is 26 hours away, within free-cancel window
+            </div>
+
+            <label class="text-xs font-semibold">Reason (optional)</label>
+            <select class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mt-1 mb-3">
+              <option>Choose a reason…</option>
+              <option>Change of plans</option>
+              <option>No longer needed</option>
+              <option>Booked wrong time</option>
+              <option>Found better alternative</option>
+              <option>Other</option>
+            </select>
+
+            <textarea class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mb-4" rows="3" placeholder="Additional notes (optional)…"></textarea>
+
+            <button class="w-full bg-rose-600 text-white rounded-lg py-3 font-semibold mb-2">Confirm cancellation</button>
+            <button class="w-full border border-slate-300 rounded-lg py-3 font-semibold">Keep booking</button>
+
+            <details class="mt-6 border-t pt-4">
+              <summary class="text-xs font-semibold text-rose-600">After-cutoff state preview ↓</summary>
+              <div class="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-900">
+                ⏰ <strong>Cannot cancel online</strong> — Less than 2 hours until slot. Please call hotline <strong>1900-xxxx</strong> for assistance.
+              </div>
+            </details>
+          </div>
+        </div>
+        <div class="text-center mt-2 text-xs font-semibold">A8 · Cancellation page</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">NEW BR-13</span> Customer Self-Cancellation page. Reason categorize → Phase 2 analyze top reasons. After-cutoff state inline để dev biết empty state.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION B — STAFF TIME SLOT (enhance existing) -->
+  <!-- ============================================================ -->
+  <section id="section-b">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="step-tag">Section B</span>
+      <h2 class="text-xl font-semibold">Staff Time Slot — Calendar &amp; Lifecycle</h2>
+      <span class="existing-badge">EXISTING UI</span>
+      <span class="new-badge">enhance status badges + side panel actions + payment modal</span>
+    </div>
+    <p class="text-slate-600 text-sm mb-6">UI mirror Time Slot module hiện có (sidebar: Calendar / Configuration / Data BI report). Phần NEW Phase 1: visual status badges trên reservation block (5 status hiện có), side panel detail với action buttons theo status, "Complete &amp; Pay" modal ghi nhận Cash/Room Charge. <strong>Không thêm status mới ngoài 5 status hiện có.</strong></p>
+
+    <div class="space-y-8">
+
+      <!-- B1: Calendar week view -->
+      <div>
+        <div class="desktop">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Time Slot · Calendar (Week)</span>
+          </div>
+          <div class="flex" style="height: 580px;">
+            <!-- Sidebar -->
+            <div class="ts-sidebar flex-shrink-0">
+              <a class="text-slate-500 text-xs"><span>←</span> Back to Spa</a>
+              <div class="px-4 py-2 text-xs text-slate-400 uppercase">Spa</div>
+              <a class="active"><span>📅</span> Calendar</a>
+              <a><span>⚙</span> Configuration <span class="ml-auto">›</span></a>
+              <a><span>📊</span> Data bi report</a>
+            </div>
+            <!-- Main -->
+            <div class="flex-1 overflow-hidden relative">
+              <div class="ts-header">- Date: <strong>18-05-2026</strong> · Date type: <strong>Week</strong></div>
+              <div class="ts-filter-row">
+                <select class="border border-slate-300 rounded px-2 py-1 text-xs w-32"><option>All outlets</option></select>
+                <select class="border border-slate-300 rounded px-2 py-1 text-xs w-24"><option>All resources</option></select>
+                <select class="border border-slate-300 rounded px-2 py-1 text-xs w-32"><option>All status</option></select>
+                <input class="border border-slate-300 rounded px-2 py-1 text-xs w-28" value="18/05/2026"/>
+                <div class="ml-auto flex border border-slate-300 rounded overflow-hidden text-xs">
+                  <button class="px-3 py-1">Day</button>
+                  <button class="px-3 py-1 bg-blue-500 text-white">Week</button>
+                  <button class="px-3 py-1">List</button>
+                </div>
+              </div>
+              <div class="ts-cal-grid">
+                <div></div>
+                <div class="ts-cal-head">Sun 17</div>
+                <div class="ts-cal-head">Mon <span class="bg-blue-500 text-white rounded-full px-2">18</span></div>
+                <div class="ts-cal-head">Tue 19</div>
+                <div class="ts-cal-head">Wed 20</div>
+                <div class="ts-cal-head">Thu 21</div>
+                <div class="ts-cal-head">Fri 22</div>
+                <div class="ts-cal-head">Sat 23</div>
+
+                <!-- 09:00 -->
+                <div class="ts-cal-time">09:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell">
+                  <div class="res-block bg-blue-200 text-blue-900 border-blue-500" style="top:2px;height:54px">
+                    <div class="font-bold">SP-1198 · Phạm Văn C</div>
+                    <div>Deep Tissue 90' · Ann</div>
+                    <div class="text-[9px] mt-0.5"><span class="bg-blue-500 text-white rounded px-1">Confirmed</span></div>
+                  </div>
+                </div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+
+                <!-- 10:00 -->
+                <div class="ts-cal-time">10:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell">
+                  <div class="res-block bg-emerald-300 text-emerald-900 border-emerald-600" style="top:2px;height:54px">
+                    <div class="font-bold">SP-1185 · Lê T.M</div>
+                    <div>Hot Stone · Kim</div>
+                    <div class="text-[9px] mt-0.5"><span class="bg-emerald-600 text-white rounded px-1">Completed</span></div>
+                  </div>
+                </div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+
+                <!-- 11:00 -->
+                <div class="ts-cal-time">11:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+
+                <!-- 14:00 -->
+                <div class="ts-cal-time">14:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell">
+                  <div class="res-block bg-amber-200 text-amber-900 border-amber-500" style="top:2px;height:36px">
+                    <div class="font-bold">SP-1234 · Nguyễn V.A</div>
+                    <div>Traditional 60' · ⚠ Reserved (webapp)</div>
+                  </div>
+                </div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+
+                <!-- 15:00 -->
+                <div class="ts-cal-time">15:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell">
+                  <div class="res-block bg-blue-200 text-blue-900 border-blue-500" style="top:2px;height:54px">
+                    <div class="font-bold">SP-1220 · Trần B</div>
+                    <div>Pearl Bliss · Ann</div>
+                    <div class="text-[9px] mt-0.5"><span class="bg-blue-500 text-white rounded px-1">Confirmed</span></div>
+                  </div>
+                </div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+
+                <!-- 16:00 -->
+                <div class="ts-cal-time">16:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell">
+                  <div class="res-block bg-slate-300 text-slate-700 border-slate-400" style="top:2px;height:36px">
+                    <div class="font-bold">— Blocked —</div>
+                    <div>massage-bed · maint.</div>
+                  </div>
+                </div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+
+                <!-- 17:00 -->
+                <div class="ts-cal-time">17:00</div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell">
+                  <div class="res-block bg-amber-200 text-amber-900 border-amber-500" style="top:2px;height:54px">
+                    <div class="font-bold">SP-1233 · Lê Thị B</div>
+                    <div>Hot Stone · ⚠ Reserved 32m</div>
+                    <div class="text-[9px]"><span class="bg-purple-500 text-white rounded px-1">Partner</span></div>
+                  </div>
+                </div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+                <div class="ts-cal-cell"></div>
+              </div>
+
+              <button class="fab">+</button>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="existing-badge">BR-05</span> Calendar existing + <span class="new-badge">BR-10</span> Lifecycle workflow trên Calendar — reservation block màu theo status (5 status hiện có Time Slot). Booking từ <span class="new-badge">BR-06</span> webapp / <span class="new-badge">BR-12</span> Partner API vào status `Reserved` (amber, có visual cue ⚠) cần staff confirm; warning text khi Reserved > 30 phút chưa xử lý. Source tag (Webapp / Partner) để phân biệt. FAB "+" giữ pattern hiện có.</p>
+      </div>
+
+      <!-- B2: Reservation detail side panel -->
+      <div>
+        <div class="desktop relative">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Reservation SP-2026-001234</span>
+          </div>
+          <div class="flex" style="height: 580px;">
+            <!-- background calendar dimmed -->
+            <div class="flex-1 bg-slate-100 opacity-40 p-6 text-xs text-slate-500">[Calendar week view behind]</div>
+            <!-- Side panel -->
+            <div class="w-[420px] bg-white border-l border-slate-200 overflow-y-auto">
+              <div class="p-4 border-b border-slate-200 flex items-center">
+                <div class="font-bold">Reservation detail</div>
+                <button class="ml-auto text-slate-400">✕</button>
+              </div>
+              <div class="p-4 space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="text-xs text-slate-500">Booking ID</div>
+                    <div class="font-bold font-mono">SP-2026-001234</div>
+                  </div>
+                  <span class="bg-amber-500 text-white rounded px-3 py-1 text-xs font-semibold">RESERVED</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <div class="text-slate-500">Source</div>
+                    <div class="font-semibold"><span class="bg-blue-100 text-blue-700 rounded px-2 py-0.5">Webapp</span></div>
+                  </div>
+                  <div>
+                    <div class="text-slate-500">Created</div>
+                    <div class="font-semibold">2 min ago</div>
+                  </div>
+                </div>
+
+                <div class="bg-slate-50 rounded p-3 text-xs space-y-1">
+                  <div class="flex justify-between"><span class="text-slate-500">Product</span><span class="font-semibold">Traditional Massage 60'</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Date · Time</span><span class="font-semibold">Tue 19/05 · 14:00–15:00</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Outlet</span><span>Long Beach</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Price</span><span class="font-bold">1,200,000 ₫</span></div>
+                  <div class="flex justify-between"><span class="text-slate-500">Payment</span><span><span class="bg-slate-200 rounded px-2">Pay at spa</span></span></div>
+                </div>
+
+                <div class="text-xs">
+                  <div class="font-semibold mb-2">Customer</div>
+                  <div class="space-y-1 text-slate-700">
+                    <div>👤 Nguyễn Văn A</div>
+                    <div>📱 +84 912 345 678 <span class="text-emerald-600">✓ OTP verified</span></div>
+                    <div>📧 nva@email.com</div>
+                    <div>🏨 Room 1208 (in-house)</div>
+                  </div>
+                </div>
+
+                <div class="text-xs">
+                  <div class="font-semibold mb-2">Resource allocation <span class="new-badge ml-1">NEW</span></div>
+                  <div class="space-y-1">
+                    <div class="bg-emerald-50 rounded p-2 flex justify-between">
+                      <span>🛏 Massage Bed</span><span class="text-emerald-700">✓ Auto-suggest: MB-001</span>
+                    </div>
+                    <div class="bg-emerald-50 rounded p-2 flex justify-between">
+                      <span>👤 Therapist</span><span class="text-emerald-700">✓ Auto-suggest: Ann (S002)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-xs">
+                  <div class="font-semibold mb-2">Activity log</div>
+                  <div class="text-slate-600 space-y-1">
+                    <div>● 9:45 — Reservation created (Webapp)</div>
+                    <div>● 9:45 — OTP verified</div>
+                    <div>● 9:45 — Email "Booking received" sent</div>
+                    <div class="text-slate-400">○ Awaiting staff confirmation…</div>
+                  </div>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t">
+                  <div class="text-[10px] text-slate-500 mb-1">Actions for status <strong>Reserved</strong>:</div>
+                  <button class="w-full bg-blue-500 text-white rounded py-2 font-semibold text-sm">✓ Confirm booking</button>
+                  <button class="w-full border border-rose-300 text-rose-600 rounded py-2 font-semibold text-sm">✗ Decline + reason</button>
+                  <button class="w-full border border-slate-300 text-slate-600 rounded py-2 font-semibold text-sm">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">BR-03</span> Reservation Multi-Resource — auto-suggest resource (massage-bed + therapist), staff click Confirm là gán luôn. <span class="new-badge">BR-10</span> RBAC + lifecycle workflow — action button đổi theo status hiện tại (xem B3 progression).</p>
+      </div>
+
+      <!-- B3: Status → Action mapping (simplified, 3 states) -->
+      <div>
+        <div class="desktop">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Status → Action mapping</span>
+          </div>
+          <div class="bg-slate-50 p-6">
+            <div class="grid grid-cols-3 gap-4 text-xs">
+              <!-- State: Reserved -->
+              <div class="bg-white rounded-lg border border-slate-200 p-4">
+                <span class="bg-amber-500 text-white rounded px-2 py-0.5 text-xs font-semibold">RESERVED</span>
+                <div class="font-bold mt-2">SP-1234 · 14:00</div>
+                <div class="text-slate-500 mt-1">Khách vừa đặt qua webapp/partner, chờ staff duyệt</div>
+                <div class="border-t mt-3 pt-3 space-y-1">
+                  <button class="w-full bg-blue-500 text-white rounded py-1.5 font-semibold">→ Confirm</button>
+                  <button class="w-full border border-rose-300 text-rose-600 rounded py-1.5">Decline + reason</button>
+                  <button class="w-full border border-slate-300 text-slate-600 rounded py-1.5">Cancel</button>
+                </div>
+              </div>
+              <!-- State: Confirmed -->
+              <div class="bg-white rounded-lg border border-slate-200 p-4">
+                <span class="bg-blue-500 text-white rounded px-2 py-0.5 text-xs font-semibold">CONFIRMED</span>
+                <div class="font-bold mt-2">SP-1220 · 15:00</div>
+                <div class="text-slate-500 mt-1">Đã duyệt, resource gán xong, chờ khách đến / đang phục vụ</div>
+                <div class="border-t mt-3 pt-3 space-y-1">
+                  <button class="w-full bg-emerald-600 text-white rounded py-1.5 font-semibold">→ Complete &amp; Pay</button>
+                  <button class="w-full border border-slate-300 text-slate-600 rounded py-1.5">Cancel</button>
+                  <button class="w-full border border-red-300 text-red-600 rounded py-1.5">Mark No-show</button>
+                </div>
+              </div>
+              <!-- State: Stuck-Confirmed (no-show alert) -->
+              <div class="bg-white rounded-lg border border-red-300 p-4">
+                <span class="bg-blue-500 text-white rounded px-2 py-0.5 text-xs font-semibold">CONFIRMED</span>
+                <div class="font-bold mt-2">SP-1175 · 13:00</div>
+                <div class="text-red-600 mt-1 font-semibold">⚠ 15 min past slot — possible no-show</div>
+                <div class="border-t mt-3 pt-3 space-y-1">
+                  <button class="w-full bg-emerald-600 text-white rounded py-1.5 font-semibold">→ Complete &amp; Pay (khách đến muộn)</button>
+                  <button class="w-full bg-red-600 text-white rounded py-1.5 font-semibold">Mark No-show</button>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 text-xs text-slate-500">Final states (<span class="bg-emerald-300 text-emerald-900 rounded px-2">Completed</span> · <span class="bg-slate-300 text-slate-900 rounded px-2">Cancelled</span> · <span class="bg-red-200 text-red-900 rounded px-2">No-show</span>) chỉ view, không có action.</div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">BR-04/BR-11</span> Action buttons map đúng status hiện có Time Slot. Không có Checked-in / In-progress intermediate — đơn giản hóa. Stuck-Confirmed past slot-time có alert visual mạnh → trigger no-show flow.</p>
+      </div>
+
+      <!-- B4: Payment Collection modal -->
+      <div>
+        <div class="desktop relative">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Complete &amp; Pay</span>
+          </div>
+          <div class="p-6 bg-slate-50 min-h-[450px] opacity-40">
+            <div class="text-sm text-slate-500">[Calendar / Reservation detail behind]</div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-white rounded-xl shadow-2xl border border-slate-200 p-6 w-[520px]">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xl">✓</div>
+                <div>
+                  <div class="font-bold">Complete service &amp; collect payment</div>
+                  <div class="text-xs text-slate-500">SP-2026-001234 · Nguyễn Văn A</div>
+                </div>
+              </div>
+
+              <div class="bg-slate-50 rounded p-3 mb-4 text-sm space-y-1">
+                <div class="flex justify-between"><span class="text-slate-500">Service</span><span>Traditional Massage 60'</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Therapist</span><span>Ann (S002)</span></div>
+                <div class="flex justify-between font-semibold border-t pt-1 mt-1"><span>Amount due</span><span>1,200,000 ₫</span></div>
+              </div>
+
+              <label class="text-xs font-semibold">Payment method *</label>
+              <div class="grid grid-cols-2 gap-2 mt-2 mb-4">
+                <label class="flex flex-col gap-1 border-2 border-slate-900 bg-slate-50 rounded p-3 cursor-pointer">
+                  <div class="flex items-center gap-2">
+                    <input type="radio" name="pm" checked/>
+                    <span class="font-semibold text-sm">💵 Cash</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500">Collect cash now</span>
+                </label>
+                <label class="flex flex-col gap-1 border border-slate-300 rounded p-3 cursor-pointer">
+                  <div class="flex items-center gap-2">
+                    <input type="radio" name="pm"/>
+                    <span class="font-semibold text-sm">🏨 Room Charge</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500">Add to room bill — Room 1208</span>
+                </label>
+              </div>
+
+              <label class="text-xs font-semibold">Amount collected (₫) *</label>
+              <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-3" value="1,200,000"/>
+
+              <label class="text-xs font-semibold">Collected by</label>
+              <select class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-4">
+                <option>Mai (current user)</option>
+              </select>
+
+              <div class="bg-blue-50 border border-blue-200 rounded p-2 text-xs text-blue-900 mb-4">
+                ℹ Reservation sẽ chuyển sang status <strong>Completed</strong> (payment record lưu vào reservation). Email confirmation gửi tự động.
+              </div>
+
+              <div class="flex gap-2">
+                <button class="flex-1 border border-slate-300 rounded py-2 font-semibold text-sm">Cancel</button>
+                <button class="flex-1 bg-emerald-600 text-white rounded py-2 font-semibold text-sm">Confirm payment &amp; complete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">NEW BR-05</span> Cash vs Room Charge (Room Charge chỉ enable khi in-house guest). Amount editable cho trường hợp staff giảm/cộng. Collected-by tracking để reconcile.</p>
+      </div>
+
+      <!-- B5: Add Reservation (enhanced) -->
+      <div>
+        <div class="desktop relative">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Add Reservation (enhanced)</span>
+          </div>
+          <div class="flex" style="height: 580px;">
+            <div class="flex-1 bg-slate-100 opacity-40 p-6 text-xs text-slate-500">[Calendar week view behind]</div>
+            <div class="w-[440px] bg-white border-l border-slate-200 overflow-y-auto">
+              <div class="p-4 border-b border-slate-200 flex items-center">
+                <div class="font-bold">Add reservation</div>
+                <button class="ml-auto text-slate-400">✕</button>
+              </div>
+              <div class="p-4 space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="font-semibold">Guest name *</label>
+                    <input class="w-full border border-slate-300 rounded px-2 py-2 mt-1" placeholder="Add guest name"/>
+                  </div>
+                  <div>
+                    <label class="font-semibold">Phone</label>
+                    <input class="w-full border border-slate-300 rounded px-2 py-2 mt-1" placeholder="Add phone number"/>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 bg-slate-50 rounded p-2">
+                  <input type="radio" checked/> <span>In-house guest</span>
+                  <input class="flex-1 border border-slate-300 rounded px-2 py-1 text-xs" placeholder="Room no"/>
+                </div>
+
+                <div>
+                  <label class="font-semibold">Outlet *</label>
+                  <select class="w-full border border-slate-300 rounded px-2 py-2 mt-1"><option>Long Beach Resort</option></select>
+                </div>
+
+                <div>
+                  <label class="font-semibold">Product *</label>
+                  <select class="w-full border border-slate-300 rounded px-2 py-2 mt-1"><option>Traditional Massage 60' · 1,200,000 ₫</option></select>
+                  <div class="text-[10px] text-slate-500 mt-1">Duration auto-fills from product</div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="font-semibold">Date *</label>
+                    <input class="w-full border border-slate-300 rounded px-2 py-2 mt-1" value="19-05-2026"/>
+                  </div>
+                  <div>
+                    <label class="font-semibold">Status</label>
+                    <select class="w-full border border-slate-300 rounded px-2 py-2 mt-1"><option>Reserved</option><option>Confirmed</option></select>
+                  </div>
+                  <div>
+                    <label class="font-semibold">From *</label>
+                    <input class="w-full border border-slate-300 rounded px-2 py-2 mt-1" value="14:00"/>
+                  </div>
+                  <div>
+                    <label class="font-semibold">To *</label>
+                    <input class="w-full border border-slate-300 rounded px-2 py-2 mt-1" value="15:00"/>
+                  </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded p-3 space-y-2">
+                  <div class="font-semibold text-blue-900 flex items-center">Resource (auto-checked) <span class="new-badge ml-2">NEW</span></div>
+                  <div class="bg-white rounded p-2 flex items-center gap-2 text-emerald-700">
+                    <span>🛏</span><div class="flex-1">Massage Bed — <strong>MB-001 available</strong></div><span class="text-xs">✓</span>
+                  </div>
+                  <div class="bg-white rounded p-2 flex items-center gap-2 text-emerald-700">
+                    <span>👤</span><div class="flex-1">Therapist — <strong>Ann (S002) suggested</strong></div><span class="text-xs">✓</span>
+                  </div>
+                  <button class="text-xs underline text-blue-700">Change selection</button>
+                </div>
+
+                <div>
+                  <label class="font-semibold">Note</label>
+                  <textarea class="w-full border border-slate-300 rounded px-2 py-2 mt-1" rows="2" placeholder="Add note"></textarea>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                  <button class="flex-1 border border-slate-300 rounded py-2 font-semibold">Cancel</button>
+                  <button class="flex-1 bg-blue-500 text-white rounded py-2 font-semibold">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 Form mirror form Add Reservation hiện có. <span class="new-badge">NEW BR-02/BR-03</span> "Resource" section đổi từ "Select resource" thủ công → auto-check + auto-suggest dựa trên Product requirement. Price hiển thị trong product dropdown.</p>
+      </div>
+
+      <!-- B6: Decline modal -->
+      <div>
+        <div class="desktop relative">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Decline reservation</span>
+          </div>
+          <div class="p-6 bg-slate-50 min-h-[400px] opacity-40">
+            <div class="text-sm text-slate-500">[Reservation detail behind]</div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-white rounded-xl shadow-2xl border border-slate-200 p-6 w-[480px]">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-rose-100 rounded-full flex items-center justify-center text-rose-600">✗</div>
+                <div>
+                  <div class="font-bold">Decline SP-2026-001234</div>
+                  <div class="text-xs text-slate-500">Customer will receive email with the reason</div>
+                </div>
+              </div>
+              <label class="text-xs font-semibold">Reason *</label>
+              <select class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-3">
+                <option>Select a reason…</option>
+                <option>Resource unavailable</option>
+                <option>Therapist not available</option>
+                <option>Outlet closed at requested time</option>
+                <option>Duplicate booking</option>
+                <option>Other</option>
+              </select>
+              <label class="text-xs font-semibold">Message to customer (optional)</label>
+              <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-4" rows="3" placeholder="Sorry, the requested slot just got booked…"></textarea>
+              <div class="bg-amber-50 border border-amber-200 rounded p-3 text-xs text-amber-800 mb-4">⚠ Slot will be released back to availability.</div>
+              <div class="flex gap-2">
+                <button class="flex-1 border border-slate-300 rounded py-2 font-semibold text-sm">Cancel</button>
+                <button class="flex-1 bg-rose-600 text-white rounded py-2 font-semibold text-sm">Confirm decline</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION C — CONFIGURATION -->
+  <!-- ============================================================ -->
+  <section id="section-c">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="step-tag">Section C</span>
+      <h2 class="text-xl font-semibold">Configuration — Resource &amp; Product</h2>
+      <span class="existing-badge">EXISTING UI</span>
+      <span class="new-badge">enhance Product: Price + Resource req</span>
+    </div>
+    <p class="text-slate-600 text-sm mb-6">UI mirror Configuration hiện có (Resource list + Product list). Phần NEW chỉ tập trung vào Product: thêm cột Price và section Resource requirement trong edit form.</p>
+
+    <div class="space-y-8">
+
+      <!-- C1: Product list with Price column -->
+      <div>
+        <div class="desktop">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Time Slot · Configuration · Product</span>
+          </div>
+          <div class="flex" style="min-height: 500px;">
+            <div class="ts-sidebar flex-shrink-0">
+              <a class="text-slate-500 text-xs"><span>←</span> Back to Configuration</a>
+              <div class="px-4 py-2 text-xs text-slate-400 uppercase">Configuration</div>
+              <a><span>👥</span> Resource</a>
+              <a class="active"><span>📦</span> Product</a>
+            </div>
+            <div class="flex-1 p-6 bg-slate-50">
+              <div class="text-xs text-slate-500 mb-3">🏠 / Product</div>
+              <div class="flex items-center mb-3">
+                <div class="font-semibold">Total: <strong>11</strong></div>
+                <button class="ml-auto bg-blue-500 text-white px-3 py-1.5 rounded text-sm font-semibold">+ Add product</button>
+              </div>
+              <div class="bg-white rounded border border-slate-200 overflow-hidden">
+                <table class="w-full text-xs">
+                  <thead class="bg-slate-100 text-slate-600">
+                    <tr>
+                      <th class="text-left p-3">Code</th>
+                      <th class="text-left p-3">Name</th>
+                      <th class="text-left p-3">Duration</th>
+                      <th class="text-left p-3 bg-blue-50">Price (VND) <span class="new-badge">NEW</span></th>
+                      <th class="text-left p-3 bg-blue-50">Resource req. <span class="new-badge">NEW</span></th>
+                      <th class="text-left p-3">Bookable online</th>
+                      <th class="p-3"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-t">
+                      <td class="p-3 font-mono">Pearl-Bliss-Ritual</td>
+                      <td class="p-3">Pearl Bliss Ritual</td>
+                      <td class="p-3">02:00</td>
+                      <td class="p-3 font-semibold">3,800,000</td>
+                      <td class="p-3 text-slate-600">massage-bed, Therapist</td>
+                      <td class="p-3"><span class="bg-emerald-100 text-emerald-700 rounded px-2">Yes</span></td>
+                      <td class="p-3 text-right"><button>✏</button></td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3 font-mono">Hot-Stone-Massage</td>
+                      <td class="p-3">Massage đá nóng</td>
+                      <td class="p-3">00:45</td>
+                      <td class="p-3 font-semibold">1,500,000</td>
+                      <td class="p-3 text-slate-600">massage-bed, hot-stone-set, Therapist</td>
+                      <td class="p-3"><span class="bg-emerald-100 text-emerald-700 rounded px-2">Yes</span></td>
+                      <td class="p-3 text-right"><button>✏</button></td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3 font-mono">Thai-Massage</td>
+                      <td class="p-3">Massage Thái cổ truyền</td>
+                      <td class="p-3">01:10</td>
+                      <td class="p-3 font-semibold">1,400,000</td>
+                      <td class="p-3 text-slate-600">massage-bed, Therapist</td>
+                      <td class="p-3"><span class="bg-emerald-100 text-emerald-700 rounded px-2">Yes</span></td>
+                      <td class="p-3 text-right"><button>✏</button></td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3 font-mono">M001</td>
+                      <td class="p-3">Traditional Massage 60'</td>
+                      <td class="p-3">01:00</td>
+                      <td class="p-3 font-semibold">1,200,000</td>
+                      <td class="p-3 text-slate-600">massage-bed, Therapist</td>
+                      <td class="p-3"><span class="bg-emerald-100 text-emerald-700 rounded px-2">Yes</span></td>
+                      <td class="p-3 text-right"><button>✏</button></td>
+                    </tr>
+                    <tr class="border-t bg-amber-50">
+                      <td class="p-3 font-mono">F002</td>
+                      <td class="p-3">Foot Treatment 60'</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3 text-rose-600 font-semibold">⚠ Missing</td>
+                      <td class="p-3 text-slate-600">—</td>
+                      <td class="p-3"><span class="bg-slate-200 text-slate-700 rounded px-2">No</span></td>
+                      <td class="p-3 text-right"><button>✏</button></td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3 font-mono">COMBO001</td>
+                      <td class="p-3">Combo Traditional…</td>
+                      <td class="p-3">00:45</td>
+                      <td class="p-3 font-semibold">2,500,000</td>
+                      <td class="p-3 text-slate-600">massage-bed, hot-stone-set, Therapist</td>
+                      <td class="p-3"><span class="bg-emerald-100 text-emerald-700 rounded px-2">Yes</span></td>
+                      <td class="p-3 text-right"><button>✏</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-[10px] text-slate-500 mt-3">Product without price = "Missing" → cannot be set "Bookable online"</div>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">NEW BR-01</span> Cột Price (highlight blue). <span class="new-badge">NEW BR-02</span> Cột Resource req. <span class="new-badge">NEW</span> Cột "Bookable online" — toggle quyết định product có hiện trên webapp/API hay không. Validation: bookable online ↔ price required.</p>
+      </div>
+
+      <!-- C2: Product edit form -->
+      <div>
+        <div class="desktop">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Edit Product · Traditional Massage 60'</span>
+          </div>
+          <div class="p-6 bg-slate-50">
+            <div class="bg-white rounded border border-slate-200 p-5">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <div class="text-xs text-slate-500">Edit product</div>
+                  <div class="font-bold text-xl">Traditional Massage 60'</div>
+                </div>
+                <span class="bg-emerald-100 text-emerald-700 rounded px-3 py-1 text-xs">Active</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                  <label class="text-xs font-semibold">Code *</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" value="M001"/>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold">Name *</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" value="Traditional Massage 60'"/>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold">Duration (hh:mm) *</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" value="01:00"/>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold">Price (VND) * <span class="new-badge">NEW</span></label>
+                  <input class="w-full border border-blue-300 bg-blue-50 rounded px-3 py-2 text-sm mt-1 font-semibold" value="1,200,000"/>
+                </div>
+                <div class="col-span-2">
+                  <label class="text-xs font-semibold">VAT <span class="new-badge">NEW</span></label>
+                  <div class="flex gap-2 mt-1">
+                    <label class="flex items-center gap-2 border border-slate-900 bg-slate-50 rounded px-3 py-2 text-sm cursor-pointer"><input type="radio" checked/> Price includes VAT</label>
+                    <label class="flex items-center gap-2 border border-slate-300 rounded px-3 py-2 text-sm cursor-pointer"><input type="radio"/> VAT add-on (10%)</label>
+                  </div>
+                </div>
+                <div class="col-span-2">
+                  <label class="text-xs font-semibold">Description</label>
+                  <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" rows="2">Vietnamese traditional massage 60 minutes.</textarea>
+                </div>
+              </div>
+
+              <div class="border-t pt-5">
+                <div class="flex items-center mb-3">
+                  <div>
+                    <div class="font-semibold flex items-center gap-2">Resource requirement <span class="new-badge">NEW BR-02</span></div>
+                    <div class="text-xs text-slate-500">System auto-allocates available instances of these resource types at booking time</div>
+                  </div>
+                  <button class="ml-auto bg-slate-100 px-3 py-1 rounded text-xs font-semibold">+ Add resource type</button>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-slate-50 rounded p-3 flex items-center gap-3">
+                    <span class="text-xl">🛏</span>
+                    <div class="flex-1">
+                      <div class="font-semibold text-sm">massage-bed</div>
+                      <div class="text-xs text-slate-500">8 instances · 6 active in this outlet</div>
+                    </div>
+                    <button class="text-rose-600 text-xs">Remove</button>
+                  </div>
+                  <div class="bg-slate-50 rounded p-3 flex items-center gap-3">
+                    <span class="text-xl">👤</span>
+                    <div class="flex-1">
+                      <div class="font-semibold text-sm">Therapist</div>
+                      <div class="text-xs text-slate-500">2 active (Ann, Kim) in this outlet</div>
+                    </div>
+                    <button class="text-rose-600 text-xs">Remove</button>
+                  </div>
+                </div>
+                <div class="mt-3 bg-blue-50 border border-blue-200 rounded p-3 text-xs text-blue-900">
+                  ℹ Phase 1: chỉ resource type-level. Khi tạo booking, system tự chọn instance available. <span class="text-blue-600">[Phase 3: quantity per type, optional vs required]</span>
+                </div>
+              </div>
+
+              <div class="border-t pt-5 mt-5">
+                <div class="font-semibold mb-2">Online booking <span class="new-badge">NEW</span></div>
+                <label class="flex items-center gap-2 text-sm">
+                  <input type="checkbox" checked/> Bookable online via webapp + Partner API
+                </label>
+                <div class="text-[10px] text-slate-500 mt-1">Toggle off to hide from customer-facing channels (still bookable by staff manually)</div>
+              </div>
+
+              <div class="flex justify-end gap-2 mt-6 pt-4 border-t">
+                <button class="border border-slate-300 px-4 py-2 rounded text-sm font-semibold">Cancel</button>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded text-sm font-semibold">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">NEW BR-01</span> Price field highlight blue (new). VAT toggle để chọn inclusive vs add-on. <span class="new-badge">NEW BR-02</span> Resource requirement section — add resource types này. "Bookable online" toggle = quyết định visible trên webapp + API.</p>
+      </div>
+
+      <!-- C3: Resource list (existing, no change) -->
+      <div>
+        <div class="desktop">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Time Slot · Configuration · Resource</span>
+            <span class="existing-badge ml-auto">EXISTING · no change</span>
+          </div>
+          <div class="flex" style="min-height: 400px;">
+            <div class="ts-sidebar flex-shrink-0">
+              <a class="text-slate-500 text-xs"><span>←</span> Back to Configuration</a>
+              <div class="px-4 py-2 text-xs text-slate-400 uppercase">Configuration</div>
+              <a class="active"><span>👥</span> Resource</a>
+              <a><span>📦</span> Product</a>
+            </div>
+            <div class="flex-1 p-6 bg-slate-50">
+              <div class="text-xs text-slate-500 mb-3">🏠 / Resource</div>
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="text-xs font-semibold">Keyword</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" placeholder="Add keyword 🔍"/>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold">Outlet</label>
+                  <select class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1"><option>Select outlet</option></select>
+                </div>
+              </div>
+              <div class="flex items-center mb-3">
+                <div class="font-semibold">Total: <strong>4</strong></div>
+                <button class="ml-auto bg-blue-500 text-white px-3 py-1.5 rounded text-sm">+ Add resource</button>
+              </div>
+              <div class="bg-white rounded border border-slate-200 overflow-hidden">
+                <table class="w-full text-xs">
+                  <thead class="bg-slate-100 text-slate-600">
+                    <tr>
+                      <th class="text-left p-3">Code</th>
+                      <th class="text-left p-3">Name</th>
+                      <th class="text-left p-3">Phone</th>
+                      <th class="text-left p-3">Description</th>
+                      <th class="p-3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-t">
+                      <td class="p-3">massage-bed</td>
+                      <td class="p-3">Giường massage</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3">Giường massage</td>
+                      <td class="p-3 text-right">👁 ✏</td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3">Therapist</td>
+                      <td class="p-3">Therapist chuyên sâu</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3">Therapist chuyên sâu</td>
+                      <td class="p-3 text-right">👁 ✏</td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3">S002</td>
+                      <td class="p-3">Ann</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3 text-right">👁 ✏</td>
+                    </tr>
+                    <tr class="border-t">
+                      <td class="p-3">S001</td>
+                      <td class="p-3">Kim</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3">—</td>
+                      <td class="p-3 text-right">👁 ✏</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 Existing screen, không sửa Phase 1. Note: model "Resource" unified — vừa là loại (massage-bed, Therapist) vừa là instance (Ann, Kim). Phase 3 sẽ tách quantity/instance rõ ràng hơn.</p>
+      </div>
+
+      <!-- C4: Add new Resource (existing) -->
+      <div>
+        <div class="desktop relative">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Add new Resource</span>
+            <span class="existing-badge ml-auto">EXISTING · no change</span>
+          </div>
+          <div class="p-6 bg-slate-50 min-h-[350px] opacity-40">
+            <div class="text-sm text-slate-500">[Resource list behind]</div>
+          </div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-white rounded-xl shadow-2xl border border-slate-200 p-6 w-[640px]">
+              <div class="flex items-center mb-4">
+                <div class="font-bold">Add new</div>
+                <button class="ml-auto text-slate-400">✕</button>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-semibold text-rose-500">* Code</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" placeholder="Add resource code"/>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-rose-500">* Name</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" placeholder="Add resource name"/>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-rose-500">* Outlet</label>
+                  <select class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1"><option>Select outlet</option></select>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold">Phone</label>
+                  <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" placeholder="Add phone number"/>
+                </div>
+                <div class="col-span-2">
+                  <label class="text-xs font-semibold">Description</label>
+                  <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1" rows="2" placeholder="Add description"></textarea>
+                </div>
+              </div>
+              <div class="flex justify-end gap-2 mt-4">
+                <button class="border border-slate-300 px-4 py-2 rounded text-sm font-semibold">Cancel</button>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded text-sm font-semibold">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER -->
+  <!-- ============================================================ -->
+  <section class="bg-white rounded-xl border border-slate-200 p-6">
+    <h2 class="font-bold mb-3">Open questions / next steps</h2>
+    <ul class="text-sm space-y-2 text-slate-700">
+      <li>• <strong>Data model migration</strong>: cần kế hoạch migrate Product hiện có — thêm `price`, `vat_inclusive`, `bookable_online` field. Backfill `bookable_online = false` cho mọi product cũ để không leak product chưa có giá ra webapp.</li>
+      <li>• <strong>Reservation schema</strong>: thêm field `payment_method`, `payment_amount`, `payment_collector`, `cancel_reason`, `cancel_by`, `cancelled_at` vào Reservation table — không thêm status mới, dùng 5 status hiện có. Confirm với eng schema migration backward-compatible.</li>
+      <li>• <strong>Room Charge integration</strong>: cần check với PMS (CiHMS guest folio module) — có API để post charge vào room không, hay Phase 1 chỉ note tay rồi reconcile thủ công?</li>
+      <li>• <strong>Auto-suggest resource</strong>: algorithm Phase 1 đơn giản (first available) hay có ưu tiên (round-robin therapist để chia đều workload)?</li>
+      <li>• <strong>Receipt</strong>: Phase 1 có cần in receipt giấy không, hay chỉ digital trong email?</li>
+      <li>• <strong>Partner API</strong>: partner pilot đầu tiên là hệ thống nào? Cần thêm endpoint nào ngoài 4 endpoint cơ bản (outlet / product / availability / create reservation)?</li>
+    </ul>
+    <div class="mt-4 text-xs text-slate-500 border-t pt-3">
+      Source: <a class="underline" href="../prds/BRD-Spa-Booking-System.md">BRD v0.4</a> · Lo-fi wireframe · Disposable artifact for stakeholder alignment
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
