@@ -76,7 +76,7 @@
 <header class="bg-slate-900 text-white px-6 py-4 sticky top-0 z-10">
   <div class="max-w-7xl mx-auto flex items-center gap-4 flex-wrap">
     <span class="font-semibold text-lg">Spa Reservation System — Wireframes</span>
-    <span class="text-xs text-slate-400">Lo-fi · 2026-05-19 · Based on BRD Overview v1.6.0</span>
+    <span class="text-xs text-slate-400">Lo-fi · 2026-05-21 · Based on BRD Overview v1.7.0 (Confluence sync)</span>
     <nav class="ml-auto flex gap-4 text-sm text-slate-300">
       <a href="#section-a" class="hover:text-white">A · Customer webapp</a>
       <a href="#section-b" class="hover:text-white">B · Staff Calendar</a>
@@ -89,13 +89,13 @@
 
   <!-- INTRO -->
   <section class="bg-white rounded-xl border border-slate-200 p-6">
-    <h1 class="text-2xl font-bold mb-2">Wireframe — Phase 1 (v1.6.0)</h1>
-    <p class="text-slate-600 text-sm mb-4">Phase 1 leverage <strong>2 module hiện có</strong>: (1) <strong>FnB Menu</strong> làm catalog source cho spa product (extend Spa Category + repurpose Cooking Time → Duration); (2) <strong>Time Slot</strong> làm scheduling engine (1 therapist = 1 Resource row, reuse Resource CRUD). Customer self-book qua mobile webapp với 3 phương thức thanh toán (Deposit / Full online / Pay at spa); system auto-pick Resource khi book; staff swap Resource tại Confirm optional. Wireframe phân biệt <span class="existing-badge">EXISTING</span> vs <span class="new-badge">NEW</span>.</p>
+    <h1 class="text-2xl font-bold mb-2">Wireframe — Phase 1 (v1.7.0)</h1>
+    <p class="text-slate-600 text-sm mb-4">Phase 1 leverage <strong>2 module hiện có</strong>: (1) <strong>FnB Menu</strong> làm catalog source (extend Spa Category + repurpose Cooking Time → Duration + reuse Item Close toggle + Custom Menu schedule + Promo Code); (2) <strong>Time Slot</strong> làm scheduling engine (1 therapist = 1 Resource row). Customer self-book qua mobile webapp với <strong>2 phương thức thanh toán</strong> (Full online / Pay at spa); cấu hình per outlet qua toggle <code>Require Payment</code> (reuse pattern QR Menu). System auto-allocate Resource khi book; staff swap tại Confirm optional. Gateway: <strong>Onepay aggregator</strong> (cùng pipeline QR Menu). Wireframe phân biệt <span class="existing-badge">EXISTING</span> vs <span class="new-badge">NEW</span>.</p>
     <div class="grid grid-cols-3 gap-4 text-sm">
       <div class="border border-slate-200 rounded-lg p-3">
         <div class="step-tag inline-block mb-2">Section A</div>
         <div class="font-semibold">Customer mobile webapp <span class="new-badge ml-2">NEW</span></div>
-        <div class="text-slate-500 text-xs mt-1">BR-06, BR-07, BR-08, BR-09, BR-13 · 10 screens</div>
+        <div class="text-slate-500 text-xs mt-1">BR-06, BR-07, BR-08, BR-09, BR-13 · 9 screens</div>
       </div>
       <div class="border border-slate-200 rounded-lg p-3">
         <div class="step-tag inline-block mb-2">Section B</div>
@@ -105,7 +105,7 @@
       <div class="border border-slate-200 rounded-lg p-3">
         <div class="step-tag inline-block mb-2">Section C</div>
         <div class="font-semibold">Configuration <span class="existing-badge ml-1">EXISTING</span><span class="new-badge ml-1">enhance</span></div>
-        <div class="text-slate-500 text-xs mt-1">BR-01, BR-04, BR-11 · 5 screens</div>
+        <div class="text-slate-500 text-xs mt-1">BR-01, BR-04, BR-08, BR-11 · 6 screens</div>
       </div>
     </div>
 
@@ -121,14 +121,13 @@
         </div>
       </div>
       <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-xs text-emerald-900">
-        <strong>Payment status</strong> — computed từ payment_lines, orthogonal lifecycle <span class="new-badge ml-1">NEW v1.6</span>:
+        <strong>Payment status</strong> — computed từ payment_lines, orthogonal lifecycle <span class="new-badge ml-1">v1.7</span>:
         <div class="mt-2 flex flex-wrap gap-2 items-center">
           <span><span class="pay-dot pay-unpaid"></span> Unpaid</span>
-          <span><span class="pay-dot pay-deposit"></span> Deposit Paid</span>
           <span><span class="pay-dot pay-fully"></span> Fully Paid</span>
-          <span><span class="pay-dot pay-refunded"></span> Refunded</span>
+          <span><span class="pay-dot pay-refunded"></span> Refunded / Partially Refunded</span>
         </div>
-        <div class="mt-2 text-[10px]">Invariant: <strong>Completed BẮT BUỘC Fully Paid</strong></div>
+        <div class="mt-2 text-[10px]">Invariant: <strong>Completed BẮT BUỘC Fully Paid</strong> · Drop Deposit Phase 1 (defer)</div>
       </div>
     </div>
   </section>
@@ -389,15 +388,15 @@
         <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-07</span> Sau verify OTP → vào step chọn payment method (A6).</p>
       </div>
 
-      <!-- A6: PAYMENT METHOD selection (NEW) -->
+      <!-- A6: PAYMENT METHOD selection (2 methods, cấu hình per outlet) -->
       <div>
         <div class="phone">
           <div class="phone-statusbar"><span>9:45</span><span>● ● ●</span></div>
           <div class="phone-body p-4">
             <div class="flex items-center gap-2 mb-3"><div>←</div><div class="font-bold flex-1 text-sm">Payment method</div></div>
             <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-xs">
-              <div class="font-semibold text-amber-800">⏱ Slot + Resource held 08:42 min</div>
-              <div class="text-amber-700 mt-0.5">System đã pick 1 therapist cho slot này</div>
+              <div class="font-semibold text-amber-800">⏱ Slot + Resource held 18:42 min</div>
+              <div class="text-amber-700 mt-0.5">System đã auto-allocate 1 therapist cho slot này</div>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 mb-4 text-xs">
@@ -407,23 +406,13 @@
             </div>
 
             <div class="text-sm font-semibold mb-2">Chọn phương thức thanh toán</div>
-            <div class="space-y-2 mb-4">
+            <div class="space-y-2 mb-3">
               <label class="block border-2 border-slate-900 bg-blue-50 rounded-xl p-3 cursor-pointer">
                 <div class="flex items-start gap-2">
                   <input type="radio" name="pm" checked class="mt-1"/>
                   <div class="flex-1">
-                    <div class="font-semibold text-sm">💳 Đặt cọc online</div>
-                    <div class="text-xs text-slate-600 mt-0.5">Trả trước <strong>30%</strong> · còn lại tại spa</div>
-                    <div class="text-xs font-bold mt-1">Cọc: 360,000 ₫ · Còn: 840,000 ₫</div>
-                  </div>
-                </div>
-              </label>
-              <label class="block border border-slate-300 rounded-xl p-3 cursor-pointer">
-                <div class="flex items-start gap-2">
-                  <input type="radio" name="pm" class="mt-1"/>
-                  <div class="flex-1">
                     <div class="font-semibold text-sm">💰 Thanh toán full online</div>
-                    <div class="text-xs text-slate-600 mt-0.5">Trả toàn bộ ngay · không còn nợ tại spa</div>
+                    <div class="text-xs text-slate-600 mt-0.5">Trả toàn bộ qua Onepay · không còn nợ tại spa</div>
                     <div class="text-xs font-bold mt-1">Tổng: 1,200,000 ₫</div>
                   </div>
                 </div>
@@ -432,36 +421,38 @@
                 <div class="flex items-start gap-2">
                   <input type="radio" name="pm" class="mt-1"/>
                   <div class="flex-1">
-                    <div class="font-semibold text-sm">💵 Pay at spa <span class="text-[10px] text-slate-400">(in-house only)</span></div>
+                    <div class="font-semibold text-sm">💵 Pay at spa <span class="text-[10px] text-slate-400">(in-house only · Require Payment=OFF)</span></div>
                     <div class="text-xs text-slate-600 mt-0.5">Cash hoặc Room Charge khi đến spa</div>
                   </div>
                 </div>
               </label>
             </div>
 
-            <div class="text-[10px] text-slate-500 mb-3">Gateway: VNPay · Momo · Visa/Master</div>
+            <input type="text" placeholder="Promo code (optional, 1 mã)" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-xs mb-2"/>
 
-            <button class="w-full bg-slate-900 text-white rounded-lg py-3 font-semibold">Continue to payment →</button>
+            <div class="text-[10px] text-slate-500 mb-3">Gateway: <strong>Onepay aggregator</strong> · domestic + Visa/Master tokenized</div>
+
+            <button class="w-full bg-slate-900 text-white rounded-lg py-3 font-semibold">Place order →</button>
           </div>
         </div>
-        <div class="text-center mt-2 text-xs font-semibold">A6 · Payment method <span class="new-badge ml-1">NEW v1.6</span></div>
-        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-08</span> 3 phương thức linh hoạt. "Pay at spa" chỉ enable khi tick in-house (A4) hoặc staff manual. Deposit % cấu hình theo outlet (default 30%).</p>
+        <div class="text-center mt-2 text-xs font-semibold">A6 · Payment method <span class="new-badge ml-1">v1.7</span></div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-08</span> <strong>2 phương thức</strong> (Deposit drop Phase 1). Per outlet config qua toggle <code>Require Payment</code> (reuse pattern QR Menu): ON → chỉ Full online; OFF → thêm option "Pay at spa". Promo code 1 mã/reservation (reuse QR pattern, khách nhập tại checkout, staff không re-apply tay).</p>
       </div>
 
-      <!-- A7: Gateway redirect / Retry on fail (NEW) -->
+      <!-- A7: Gateway redirect / Retry on fail (Onepay) -->
       <div>
         <div class="phone">
           <div class="phone-statusbar"><span>9:46</span><span>● ● ●</span></div>
           <div class="phone-body p-4">
             <div class="text-center mb-4 mt-2">
               <div class="text-3xl mb-2">🔒</div>
-              <div class="font-semibold">Redirecting to VNPay…</div>
+              <div class="font-semibold">Redirecting to Onepay…</div>
               <div class="text-xs text-slate-500 mt-1">Order ID: SP-2026-001234</div>
-              <div class="text-xs font-bold mt-2">360,000 ₫</div>
+              <div class="text-xs font-bold mt-2">1,200,000 ₫</div>
             </div>
 
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-xs text-blue-900">
-              ℹ Đừng đóng tab khi đang thanh toán. Slot + therapist của bạn vẫn được giữ trong 10 phút.
+              ℹ Đừng đóng tab khi đang thanh toán. Slot + therapist được giữ trong <strong>20 phút</strong>.
             </div>
 
             <details class="bg-rose-50 border border-rose-200 rounded-lg p-3 mb-3 text-xs">
@@ -469,32 +460,32 @@
               <div class="mt-3 space-y-2">
                 <div class="text-rose-700">
                   ✗ <strong>Thanh toán không thành công</strong>
-                  <div class="text-[11px] mt-1">Mã lỗi: VNP-99 (Khách hàng hủy giao dịch)</div>
+                  <div class="text-[11px] mt-1">Mã lỗi: OP-99 (Khách hàng hủy giao dịch)</div>
                 </div>
                 <div class="bg-white rounded p-2 text-amber-800 border border-amber-200">
-                  ⏱ Slot + therapist vẫn được giữ <strong>09:21</strong> phút — bạn có thể thử lại
+                  ⏱ Slot + therapist vẫn được giữ <strong>19:21</strong> phút — bạn có thể thử lại không giới hạn lần
                 </div>
                 <button class="w-full bg-slate-900 text-white rounded-lg py-2 text-sm font-semibold">Retry payment</button>
                 <button class="w-full border border-slate-300 rounded-lg py-2 text-sm">Đổi phương thức</button>
-                <div class="text-[10px] text-slate-500 text-center">Sau 10 phút không retry → slot release</div>
+                <div class="text-[10px] text-slate-500 text-center">Sau 20 phút không retry → reservation Cancelled</div>
               </div>
             </details>
 
             <details class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs">
               <summary class="font-semibold text-amber-800">After-timeout state preview ↓</summary>
               <div class="mt-3 text-amber-800">
-                ⏰ <strong>Slot đã được release</strong>
-                <div class="text-[11px] mt-1">Quá thời gian giữ (10 phút). Vui lòng đặt lại từ đầu.</div>
+                ⏰ <strong>Reservation đã bị Cancelled</strong>
+                <div class="text-[11px] mt-1">Quá thời gian giữ slot (20 phút). Slot + therapist đã release. Vui lòng đặt lại từ đầu.</div>
                 <button class="w-full bg-slate-900 text-white rounded-lg py-2 text-sm font-semibold mt-2">Book again</button>
               </div>
             </details>
           </div>
         </div>
-        <div class="text-center mt-2 text-xs font-semibold">A7 · Gateway redirect + Retry <span class="new-badge ml-1">NEW v1.6</span></div>
-        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-08</span> Retry pattern tham khảo QR Menu. Giữ slot + Resource lock trong 10p Pending-Payment, retry unlimited. Timeout → release slot, email gợi ý book lại.</p>
+        <div class="text-center mt-2 text-xs font-semibold">A7 · Onepay redirect + Retry <span class="new-badge ml-1">v1.7</span></div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-08</span> Retry pattern reuse QR Menu pipeline. Giữ slot + Resource lock trong <strong>20p</strong> Pending-Payment (align QR Menu 20p timeout), retry unlimited. Timeout → terminal <strong>Cancelled</strong> (đồng nhất state QR Menu Received→Canceled). Onepay aggregator — same pipeline đã tích hợp QR Menu.</p>
       </div>
 
-      <!-- A8: Booking received (Reserved) — variants by payment_status -->
+      <!-- A8: Booking received (Reserved) — Fully Paid variant -->
       <div>
         <div class="phone">
           <div class="phone-statusbar"><span>9:47</span><span>● ● ●</span></div>
@@ -505,7 +496,7 @@
               <div class="text-xs text-slate-500 mt-1">Awaiting spa confirmation</div>
               <div class="text-[10px] mt-2 flex gap-1 justify-center">
                 <span class="bg-amber-200 text-amber-900 rounded px-2 py-0.5">Status: Reserved</span>
-                <span class="bg-amber-100 text-amber-900 rounded px-2 py-0.5 flex items-center gap-1"><span class="pay-dot pay-deposit"></span> Deposit Paid</span>
+                <span class="bg-emerald-100 text-emerald-900 rounded px-2 py-0.5 flex items-center gap-1"><span class="pay-dot pay-fully"></span> Fully Paid</span>
               </div>
             </div>
             <div class="border border-slate-200 rounded-xl p-3 mb-3">
@@ -518,15 +509,15 @@
               </div>
               <div class="border-t border-slate-200 mt-2 pt-2 text-xs space-y-1">
                 <div class="flex justify-between"><span class="text-slate-500">Tổng</span><span class="font-bold">1,200,000 ₫</span></div>
-                <div class="flex justify-between text-emerald-700"><span>Đã cọc (VNPay)</span><span class="font-semibold">- 360,000 ₫</span></div>
-                <div class="flex justify-between font-bold border-t pt-1"><span>Còn lại trả tại spa</span><span>840,000 ₫</span></div>
+                <div class="flex justify-between text-emerald-700"><span>Đã thanh toán (Onepay)</span><span class="font-semibold">- 1,200,000 ₫</span></div>
+                <div class="flex justify-between font-bold border-t pt-1 text-emerald-700"><span>Còn nợ</span><span>0 ₫</span></div>
               </div>
             </div>
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3 text-[11px] text-blue-900">
-              💵 <strong>Còn lại 840,000 ₫</strong> — Cash hoặc Room Charge (Room 1208) khi đến spa.
-            </div>
             <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-2 mb-3 text-[11px] text-emerald-900">
-              📧 Email "Booking received" sent · 🧾 E-invoice cọc đã gửi
+              ✓ <strong>Đã thanh toán đầy đủ</strong> · Khi đến spa, xuất trình Booking ID hoặc SĐT
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3 text-[11px] text-blue-900">
+              📧 Email "Booking received" sent · 🧾 E-invoice đã gửi
             </div>
             <div class="grid grid-cols-2 gap-2 mb-2">
               <button class="border border-slate-300 rounded-lg py-1.5 text-xs font-semibold">📅 Add to Cal</button>
@@ -535,8 +526,8 @@
             <button class="border border-rose-300 text-rose-600 rounded-lg w-full py-1.5 text-xs font-semibold">Cancel booking →</button>
           </div>
         </div>
-        <div class="text-center mt-2 text-xs font-semibold">A8 · Reserved · Deposit Paid</div>
-        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-08 + BR-09</span> Payment status hiển thị rõ + breakdown đã trả/còn lại. E-invoice gửi ngay sau deposit. <strong>3 variants</strong>: Fully Paid (xanh, "Đã thanh toán đầy đủ"), Deposit Paid (cam, "Còn lại X tại spa"), Unpaid (gray, "Trả toàn bộ tại spa").</p>
+        <div class="text-center mt-2 text-xs font-semibold">A8 · Reserved · Fully Paid</div>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-08 + BR-09</span> Payment status hiển thị rõ + breakdown. E-invoice gửi ngay sau payment success. <strong>2 variants Phase 1</strong>: Fully Paid (xanh, "Đã thanh toán đầy đủ") · Unpaid (gray, "Trả toàn bộ tại spa — Cash / Room Charge"). Deposit option drop Phase 1.</p>
       </div>
 
       <!-- A9: CONFIRMED (post-staff-confirm) -->
@@ -550,7 +541,7 @@
               <div class="text-xs text-slate-500 mt-1">Spa staff đã xác nhận · See you at the spa!</div>
               <div class="text-[10px] mt-2 flex gap-1 justify-center">
                 <span class="bg-blue-200 text-blue-900 rounded px-2 py-0.5">Status: Confirmed</span>
-                <span class="bg-amber-100 text-amber-900 rounded px-2 py-0.5 flex items-center gap-1"><span class="pay-dot pay-deposit"></span> Deposit Paid</span>
+                <span class="bg-emerald-100 text-emerald-900 rounded px-2 py-0.5 flex items-center gap-1"><span class="pay-dot pay-fully"></span> Fully Paid</span>
               </div>
             </div>
             <div class="border border-emerald-200 bg-emerald-50 rounded-xl p-3 mb-3">
@@ -560,8 +551,8 @@
                 <div class="flex justify-between"><span class="text-slate-500">When</span><span class="font-semibold">19/05 · 14:00</span></div>
                 <div class="flex justify-between"><span class="text-slate-500">Therapist</span><span class="font-semibold">Ann (S002)</span></div>
                 <div class="flex justify-between"><span class="text-slate-500">Tổng</span><span class="font-bold">1,200,000 ₫</span></div>
-                <div class="flex justify-between text-emerald-700 border-t pt-1 mt-1"><span>Đã cọc</span><span class="font-semibold">- 360,000 ₫</span></div>
-                <div class="flex justify-between font-bold"><span>Còn lại</span><span>840,000 ₫</span></div>
+                <div class="flex justify-between text-emerald-700 border-t pt-1 mt-1"><span>Đã thanh toán (Onepay)</span><span class="font-semibold">- 1,200,000 ₫</span></div>
+                <div class="flex justify-between font-bold text-emerald-700"><span>Còn nợ</span><span>0 ₫</span></div>
               </div>
             </div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-3 text-center">
@@ -600,9 +591,9 @@
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3 text-xs">
               <div class="font-semibold text-blue-900 mb-1">💸 Refund preview</div>
               <div class="space-y-1 text-blue-900">
-                <div class="flex justify-between"><span>Đã trả (cọc)</span><span class="font-semibold">360,000 ₫</span></div>
-                <div class="flex justify-between"><span>Refund (100% · ≥24h)</span><span class="font-bold text-emerald-700">+ 360,000 ₫</span></div>
-                <div class="text-[10px] text-blue-700 mt-1">Hoàn về tài khoản đã thanh toán · 3–7 ngày làm việc</div>
+                <div class="flex justify-between"><span>Đã trả (Onepay)</span><span class="font-semibold">1,200,000 ₫</span></div>
+                <div class="flex justify-between"><span>Refund (100% · ≥24h)</span><span class="font-bold text-emerald-700">+ 1,200,000 ₫</span></div>
+                <div class="text-[10px] text-blue-700 mt-1">Hoàn về thẻ đã thanh toán qua Onepay Refund API · 3–7 ngày tùy bank</div>
               </div>
             </div>
 
@@ -628,13 +619,19 @@
             <details class="mt-2">
               <summary class="text-xs font-semibold text-amber-700">Cancel policy 4-24h (refund 50%) ↓</summary>
               <div class="mt-2 bg-amber-50 border border-amber-200 rounded-lg p-2 text-xs text-amber-900">
-                Hoàn 50% (180,000 ₫) · Khấu trừ 50% phí dịch vụ
+                Hoàn 50% (600,000 ₫) · Khấu trừ 50% phí dịch vụ
+              </div>
+            </details>
+            <details class="mt-2">
+              <summary class="text-xs font-semibold text-slate-600">Cancel Pay-at-spa (Unpaid) ↓</summary>
+              <div class="mt-2 bg-slate-50 border border-slate-200 rounded-lg p-2 text-xs text-slate-700">
+                Khách chưa trả tiền → chỉ release slot + therapist, KHÔNG refund flow.
               </div>
             </details>
           </div>
         </div>
         <div class="text-center mt-2 text-xs font-semibold">A10 · Cancel + Refund</div>
-        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-13</span> Refund auto qua gateway nếu có online payment. Policy theo outlet: ≥24h: 100% · 4–24h: 50% · &lt;4h: 0%. Refund timeline hiển thị để khách yên tâm. payment_status → Refunded / Partially Refunded.</p>
+        <p class="annotation mt-2 max-w-xs">📌 <span class="new-badge">BR-13</span> Refund flow theo payment_status + source: <strong>Fully Paid · gateway online</strong> → auto-trigger Onepay Refund API theo policy (≥24h: 100% · 4–24h: 50% · &lt;4h: 0%); <strong>Unpaid</strong> → chỉ release slot; <strong>partner_collected</strong> (BR-12) → flag <code>requires_partner_refund=true</code> cho partner xử lý kênh riêng.</p>
       </div>
 
     </div>
@@ -749,9 +746,9 @@
                 <div class="ts-cal-cell"></div>
                 <div class="ts-cal-cell">
                   <div class="res-block bg-amber-200 text-amber-900 border-amber-500" style="top:2px;height:54px">
-                    <div class="font-bold flex items-center gap-1">SP-1234 · Nguyễn A <span class="pay-dot pay-deposit"></span></div>
+                    <div class="font-bold flex items-center gap-1">SP-1234 · Nguyễn A <span class="pay-dot pay-fully"></span></div>
                     <div>Traditional 60' · Ann (auto)</div>
-                    <div class="text-[9px] mt-0.5"><span class="bg-amber-500 text-white rounded px-1">Reserved</span> <span class="bg-amber-600 text-white rounded px-1 ml-0.5">Deposit</span> <span class="bg-blue-500 text-white rounded px-1 ml-0.5">Webapp</span></div>
+                    <div class="text-[9px] mt-0.5"><span class="bg-amber-500 text-white rounded px-1">Reserved</span> <span class="bg-emerald-500 text-white rounded px-1 ml-0.5">Fully Paid</span> <span class="bg-blue-500 text-white rounded px-1 ml-0.5">Webapp</span></div>
                   </div>
                 </div>
                 <div class="ts-cal-cell"></div>
@@ -811,7 +808,7 @@
             </div>
           </div>
         </div>
-        <p class="annotation mt-3 inline-block">📌 <span class="existing-badge">BR-05</span> Calendar existing + <span class="new-badge">BR-08</span> <strong>payment dot badge</strong> bên cạnh booking ID (gray=Unpaid, orange=Deposit, green=Fully Paid, red=Refunded). Reservation từ webapp/partner đã có therapist (auto-pick) hiển thị tại lane therapist tương ứng. Source tag (Webapp/Partner) giữ. Filter "Payment status" mới thêm. Block Time recurring (<span class="new-badge">BR-04</span>) — vd Ann lunch 11–12h T2–T6.</p>
+        <p class="annotation mt-3 inline-block">📌 <span class="existing-badge">BR-05</span> Calendar existing + <span class="new-badge">BR-08</span> <strong>payment dot badge</strong> bên cạnh booking ID (gray=Unpaid, green=Fully Paid, red=Refunded — drop Deposit Phase 1). Reservation từ webapp/partner đã có therapist (auto-allocate) hiển thị tại lane therapist tương ứng. Source tag (Webapp/Partner) giữ. Partner reservation có thể `payment_status=Unpaid` mặc định + optional `partner_collected` line (BR-12). Filter "Payment status" mới thêm. Block Time recurring (<span class="new-badge">BR-04</span>) — vd Ann lunch 11–12h T2–T6.</p>
         <div class="mt-3 bg-blue-50 border border-blue-200 rounded p-3 text-xs text-blue-900">
           <strong>📣 New booking notification cho staff</strong> — 3 kênh đồng thời khi reservation mới được tạo từ webapp/partner:
           <ol class="list-decimal ml-5 mt-1 space-y-0.5">
@@ -844,7 +841,7 @@
                   </div>
                   <div class="flex gap-1">
                     <span class="bg-amber-500 text-white rounded px-2 py-1 text-xs font-semibold">RESERVED</span>
-                    <span class="bg-amber-600 text-white rounded px-2 py-1 text-xs font-semibold flex items-center gap-1"><span class="pay-dot pay-deposit"></span> DEPOSIT</span>
+                    <span class="bg-emerald-500 text-white rounded px-2 py-1 text-xs font-semibold flex items-center gap-1"><span class="pay-dot pay-fully"></span> FULLY PAID</span>
                   </div>
                 </div>
 
@@ -891,31 +888,31 @@
                 </div>
 
                 <div class="text-xs">
-                  <div class="font-semibold mb-2 flex items-center gap-1">Payment breakdown <span class="new-badge ml-1">v1.6</span></div>
+                  <div class="font-semibold mb-2 flex items-center gap-1">Payment breakdown <span class="new-badge ml-1">v1.7</span></div>
                   <div class="bg-slate-50 rounded p-2 space-y-1">
                     <div class="flex justify-between"><span class="text-slate-500">Total</span><span class="font-semibold">1,200,000 ₫</span></div>
-                    <div class="flex justify-between text-emerald-700"><span>● Deposit · VNPay · 9:46</span><span class="font-semibold">- 360,000 ₫</span></div>
-                    <div class="flex justify-between border-t pt-1 font-bold text-amber-700"><span>Còn nợ</span><span>840,000 ₫</span></div>
-                    <div class="text-[10px] text-slate-500 mt-1">🧾 E-invoice cọc: <a class="underline">INV-2026-5512</a></div>
+                    <div class="flex justify-between text-emerald-700"><span>● Full online · Onepay · 9:46</span><span class="font-semibold">- 1,200,000 ₫</span></div>
+                    <div class="flex justify-between border-t pt-1 font-bold text-emerald-700"><span>Còn nợ</span><span>0 ₫</span></div>
+                    <div class="text-[10px] text-slate-500 mt-1">🧾 E-invoice: <a class="underline">INV-2026-5512</a></div>
                   </div>
                 </div>
 
                 <div class="text-xs">
                   <div class="font-semibold mb-2">Activity log</div>
                   <div class="text-slate-600 space-y-1">
-                    <div>● 9:45 — Reservation created (Webapp)</div>
-                    <div>● 9:45 — Resource auto-picked: Ann (S002)</div>
+                    <div>● 9:45 — Reservation created (Webapp · Pending-Payment)</div>
+                    <div>● 9:45 — Resource auto-allocated: Ann (S002)</div>
                     <div>● 9:45 — OTP verified</div>
-                    <div>● 9:46 — VNPay deposit 360,000 ₫ success</div>
-                    <div>● 9:46 — Email "Booking received" sent</div>
+                    <div>● 9:46 — Onepay full payment 1,200,000 ₫ success → Reserved</div>
+                    <div>● 9:46 — Email "Booking received" sent + e-invoice</div>
                     <div class="text-slate-400">○ Awaiting staff confirmation…</div>
                   </div>
                 </div>
 
                 <div class="space-y-2 pt-2 border-t">
-                  <div class="text-[10px] text-slate-500 mb-1">Actions for <strong>Reserved + Deposit Paid</strong>:</div>
+                  <div class="text-[10px] text-slate-500 mb-1">Actions for <strong>Reserved + Fully Paid</strong>:</div>
                   <button class="w-full bg-blue-500 text-white rounded py-2 font-semibold text-sm">✓ Confirm booking</button>
-                  <button class="w-full border border-rose-300 text-rose-600 rounded py-2 font-semibold text-sm">✗ Decline + auto refund 100%</button>
+                  <button class="w-full border border-rose-300 text-rose-600 rounded py-2 font-semibold text-sm">✗ Decline + auto refund 100% qua Onepay</button>
                   <button class="w-full border border-slate-300 text-slate-600 rounded py-2 font-semibold text-sm">Cancel</button>
                 </div>
               </div>
@@ -933,7 +930,7 @@
             <span class="ml-2">CiHMS — Confirmed status → Complete button fork by payment_status</span>
           </div>
           <div class="bg-slate-50 p-6">
-            <div class="grid grid-cols-3 gap-4 text-xs">
+            <div class="grid grid-cols-2 gap-6 text-xs max-w-2xl mx-auto">
               <!-- Fully Paid -->
               <div class="bg-white rounded-lg border border-emerald-300 p-4">
                 <div class="flex gap-1 mb-2">
@@ -941,29 +938,13 @@
                   <span class="bg-emerald-500 text-white rounded px-2 py-0.5 text-xs font-semibold flex items-center gap-1"><span class="pay-dot pay-fully"></span> FULLY PAID</span>
                 </div>
                 <div class="font-bold mt-2">SP-1198 · 09:00</div>
-                <div class="text-slate-500 mt-1">Khách đã trả full online · service xong</div>
+                <div class="text-slate-500 mt-1">Khách đã trả full online qua Onepay · service xong</div>
                 <div class="bg-emerald-50 border border-emerald-200 rounded p-2 mt-2 text-[11px] text-emerald-800">
                   ✓ Khách đã thanh toán đầy đủ. Không thu thêm.
                 </div>
                 <div class="border-t mt-3 pt-3 space-y-1">
                   <button class="w-full bg-emerald-600 text-white rounded py-1.5 font-semibold">→ Mark Complete</button>
                   <div class="text-[10px] text-slate-500 text-center">1-click, không modal</div>
-                </div>
-              </div>
-              <!-- Deposit Paid -->
-              <div class="bg-white rounded-lg border border-amber-300 p-4">
-                <div class="flex gap-1 mb-2">
-                  <span class="bg-blue-500 text-white rounded px-2 py-0.5 text-xs font-semibold">CONFIRMED</span>
-                  <span class="bg-amber-600 text-white rounded px-2 py-0.5 text-xs font-semibold flex items-center gap-1"><span class="pay-dot pay-deposit"></span> DEPOSIT</span>
-                </div>
-                <div class="font-bold mt-2">SP-1234 · 14:00</div>
-                <div class="text-slate-500 mt-1">Đã cọc 360K · còn nợ 840K</div>
-                <div class="bg-amber-50 border border-amber-200 rounded p-2 mt-2 text-[11px] text-amber-800">
-                  💵 Thu phần còn lại: <strong>840,000 ₫</strong>
-                </div>
-                <div class="border-t mt-3 pt-3 space-y-1">
-                  <button class="w-full bg-emerald-600 text-white rounded py-1.5 font-semibold">→ Pay Balance</button>
-                  <div class="text-[10px] text-slate-500 text-center">Modal thu phần còn nợ</div>
                 </div>
               </div>
               <!-- Unpaid -->
@@ -991,10 +972,10 @@
         </div>
         <p class="annotation mt-3 inline-block">📌 <span class="new-badge">BR-08 + BR-10</span> Complete button <strong>fork 3 ways</strong> theo payment_status. UX target: staff không phải nghĩ "khách trả chưa?" — UI tự dẫn dắt. Tránh 0 case staff thu nhầm khách đã trả online (KPI).</p>
         <div class="mt-3 bg-emerald-50 border border-emerald-200 rounded p-3 text-xs text-emerald-900">
-          <strong>✓ Sau khi click Complete (3 variants) — chuỗi side-effects tự động:</strong>
+          <strong>✓ Sau khi click Complete (2 variants Phase 1) — chuỗi side-effects tự động:</strong>
           <ol class="list-decimal ml-5 mt-1 space-y-0.5">
             <li>Reservation lifecycle: <strong>Confirmed → Completed</strong> · payment_status đảm bảo Fully Paid (invariant)</li>
-            <li><strong>E-invoice qua pipeline FnB</strong> tự động sinh (hoặc update nếu deposit đã có) · gửi email khách</li>
+            <li><strong>E-invoice qua pipeline FnB</strong> tự động sinh · gửi email khách (filter `product_type=spa` trên dashboard cho Finance)</li>
             <li>Email khách "Service completed · cảm ơn"</li>
             <li>Slot + Resource <strong>release</strong> (sẵn sàng cho booking khác giờ trùng)</li>
             <li>Activity log ghi: collector + amount + timestamp + payment method từng line</li>
@@ -1003,12 +984,12 @@
         </div>
       </div>
 
-      <!-- B4: Pay Balance modal -->
+      <!-- B4: Complete & Pay modal (Unpaid → Completed) -->
       <div>
         <div class="desktop relative">
           <div class="desktop-titlebar">
             <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
-            <span class="ml-2">CiHMS — Pay Balance (Deposit Paid → Complete)</span>
+            <span class="ml-2">CiHMS — Complete &amp; Pay (Unpaid → Completed)</span>
           </div>
           <div class="p-6 bg-slate-50 min-h-[500px] opacity-40">
             <div class="text-sm text-slate-500">[Calendar / Reservation detail behind]</div>
@@ -1018,20 +999,18 @@
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-xl">✓</div>
                 <div>
-                  <div class="font-bold">Pay Balance &amp; Complete</div>
-                  <div class="text-xs text-slate-500">SP-2026-001234 · Nguyễn Văn A</div>
+                  <div class="font-bold">Complete &amp; Pay (Pay at spa)</div>
+                  <div class="text-xs text-slate-500">SP-2026-001220 · Trần B · Pearl Bliss Ritual</div>
                 </div>
               </div>
 
               <div class="bg-slate-50 rounded p-3 mb-4 text-sm space-y-1">
-                <div class="flex justify-between"><span class="text-slate-500">Service</span><span>Traditional Massage 60'</span></div>
+                <div class="flex justify-between"><span class="text-slate-500">Service</span><span>Pearl Bliss Ritual</span></div>
                 <div class="flex justify-between"><span class="text-slate-500">Therapist</span><span>Ann (S002)</span></div>
-                <div class="flex justify-between border-t pt-1 mt-1"><span class="text-slate-500">Total</span><span>1,200,000 ₫</span></div>
-                <div class="flex justify-between text-emerald-700"><span>● Deposit · VNPay · 9:46</span><span>- 360,000 ₫</span></div>
-                <div class="flex justify-between font-bold border-t pt-1 text-amber-700"><span>Còn nợ</span><span>840,000 ₫</span></div>
+                <div class="flex justify-between border-t pt-1 mt-1 font-semibold"><span class="text-slate-500">Amount due</span><span>3,800,000 ₫</span></div>
               </div>
 
-              <label class="text-xs font-semibold">Phương thức thu phần còn lại *</label>
+              <label class="text-xs font-semibold">Phương thức thanh toán *</label>
               <div class="grid grid-cols-2 gap-2 mt-2 mb-4">
                 <label class="flex flex-col gap-1 border-2 border-slate-900 bg-slate-50 rounded p-3 cursor-pointer">
                   <div class="flex items-center gap-2"><input type="radio" name="pm" checked/> <span class="font-semibold text-sm">💵 Cash</span></div>
@@ -1039,17 +1018,17 @@
                 </label>
                 <label class="flex flex-col gap-1 border border-slate-300 rounded p-3 cursor-pointer">
                   <div class="flex items-center gap-2"><input type="radio" name="pm"/> <span class="font-semibold text-sm">🏨 Room Charge</span></div>
-                  <span class="text-[10px] text-slate-500">Room 1208</span>
+                  <span class="text-[10px] text-slate-500">Room 1208 (in-house)</span>
                 </label>
               </div>
 
               <label class="text-xs font-semibold">Amount collected (₫) *</label>
-              <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-3" value="840,000"/>
+              <input class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-3" value="3,800,000"/>
               <label class="text-xs font-semibold">Collected by</label>
               <select class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-4"><option>Mai (current user)</option></select>
 
               <div class="bg-emerald-50 border border-emerald-200 rounded p-2 text-xs text-emerald-900 mb-4">
-                ✓ Sau khi thu xong: payment_status → <strong>Fully Paid</strong> · Reservation → <strong>Completed</strong> · E-invoice update phần còn lại.
+                ✓ Sau khi thu xong: payment_status → <strong>Fully Paid</strong> · Reservation → <strong>Completed</strong> · E-invoice sinh qua FnB pipeline · Email khách "Service completed".
               </div>
 
               <div class="flex gap-2">
@@ -1059,7 +1038,7 @@
             </div>
           </div>
         </div>
-        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">BR-08</span> Modal "Pay Balance" cho case Deposit Paid → chỉ thu phần còn nợ. Modal "Complete &amp; Pay" (cho Unpaid) tương tự nhưng amount = full total. Modal "Mark Complete" (cho Fully Paid) = không có modal, 1-click confirm.</p>
+        <p class="annotation mt-3 inline-block">📌 <span class="new-badge">BR-08</span> Modal "Complete &amp; Pay" cho case <strong>Unpaid</strong> (Pay at spa) — thu toàn bộ Cash/Room Charge. Case <strong>Fully Paid</strong> → "Mark Complete" 1-click (không modal). Phase 1 KHÔNG có case Deposit (drop).</p>
         <div class="mt-3 bg-amber-50 border border-amber-200 rounded p-3 text-xs text-amber-900">
           <strong>🏨 Room Charge flow chi tiết:</strong>
           <ol class="list-decimal ml-5 mt-1 space-y-0.5">
@@ -1200,7 +1179,7 @@
               <textarea class="w-full border border-slate-300 rounded px-3 py-2 text-sm mt-1 mb-4" rows="3" placeholder="Sorry, …"></textarea>
 
               <div class="bg-blue-50 border border-blue-200 rounded p-3 text-xs text-blue-900 mb-4">
-                💸 <strong>Auto refund 100%</strong> qua VNPay — 360,000 ₫ về tài khoản 3–7 ngày. payment_status → Refunded.
+                💸 <strong>Auto refund 100%</strong> qua Onepay Refund API — 1,200,000 ₫ về thẻ 3–7 ngày. payment_status → Refunded.
               </div>
 
               <div class="bg-amber-50 border border-amber-200 rounded p-2 text-xs text-amber-800 mb-4">⚠ Slot + Resource released back to availability.</div>
@@ -1521,6 +1500,123 @@
           </div>
         </div>
         <p class="annotation mt-3 inline-block">📌 <span class="new-badge">BR-11</span> Spa Menu = Custom Menu mới gắn với outlet spa. KHÔNG cần build UI mới — reuse Custom Menus CRUD hiện có. Webapp/Partner API query: `GET /menu?custom_menu=SPA&outlet={id}`.</p>
+      </div>
+
+      <!-- C3b: QR Menu Pattern Reuse — 4 reused patterns -->
+      <div>
+        <div class="desktop">
+          <div class="desktop-titlebar">
+            <div class="dot bg-rose-400"></div><div class="dot bg-amber-400"></div><div class="dot bg-emerald-400"></div>
+            <span class="ml-2">CiHMS — Patterns reuse từ QR Menu (no new UI Phase 1)</span>
+            <span class="existing-badge ml-auto">REUSE · 4 patterns</span>
+          </div>
+          <div class="p-6 bg-slate-50 space-y-4">
+
+            <!-- Pattern 1: Configure Payment Method + Require Payment toggle -->
+            <div class="bg-white rounded border border-slate-200 p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="bg-purple-100 text-purple-700 text-[10px] font-bold rounded px-2 py-0.5">PATTERN 1</span>
+                <div class="font-semibold text-sm">Per-outlet Payment config — reuse QR Generator</div>
+                <span class="new-badge ml-auto">BR-08 v1.7</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <div class="text-slate-500 mb-1">Vị trí UI</div>
+                  <div class="bg-slate-50 rounded p-2 border border-slate-200">QR Generator screen → cột Action mới cho từng outlet (reuse từ QR Menu hiện có)</div>
+                </div>
+                <div>
+                  <div class="text-slate-500 mb-1">Cấu hình</div>
+                  <div class="bg-slate-50 rounded p-2 border border-slate-200">
+                    Toggle <code>Require Payment</code> + button <code>Configure Payment Method</code> chọn method active cho outlet (Onepay aggregator domestic / Visa-Master)
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2 grid grid-cols-2 gap-2 text-[11px]">
+                <div class="bg-emerald-50 border border-emerald-200 rounded p-2">
+                  <strong>Require Payment = ON</strong><br>Webapp chỉ hiển thị "Full online" · Reservation tạo Pending-Payment 20p → Reserved+Fully Paid
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded p-2">
+                  <strong>Require Payment = OFF</strong><br>Webapp thêm option "Pay at spa" · Reservation tạo Reserved+Unpaid ngay (in-house only)
+                </div>
+              </div>
+              <div class="text-[10px] text-slate-500 mt-2">ℹ Phase 1 reuse 100% UI QR Generator — không build screen mới. Spa & FnB cùng quản lý gateway/payment config qua 1 chỗ.</div>
+            </div>
+
+            <!-- Pattern 2: Item Close toggle -->
+            <div class="bg-white rounded border border-slate-200 p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="bg-purple-100 text-purple-700 text-[10px] font-bold rounded px-2 py-0.5">PATTERN 2</span>
+                <div class="font-semibold text-sm">Item Close toggle — tạm thời disable item</div>
+                <span class="new-badge ml-auto">BR-11 v1.7</span>
+              </div>
+              <div class="grid grid-cols-3 gap-3 text-xs">
+                <div class="bg-emerald-50 border border-emerald-200 rounded p-2">
+                  <div class="font-semibold text-emerald-800">Active toggle</div>
+                  <div class="text-emerald-700 text-[11px] mt-1">Long-term: discontinue service, restructure menu. Inactive → ẩn vĩnh viễn.</div>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded p-2">
+                  <div class="font-semibold text-amber-800">Close toggle (NEW)</div>
+                  <div class="text-amber-700 text-[11px] mt-1">Tạm thời 1-2 ngày: therapist nghỉ ốm. Bật lại không cần config lại.</div>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded p-2">
+                  <div class="font-semibold text-slate-800">Webapp behavior</div>
+                  <div class="text-slate-700 text-[11px] mt-1">Item bị Close → disabled với message "Tạm thời không khả dụng" (không ẩn hẳn).</div>
+                </div>
+              </div>
+              <div class="text-[10px] text-slate-500 mt-2">ℹ Reuse pattern Close item toggle của QR Menu — chỉ thêm toggle này vào Product List spa.</div>
+            </div>
+
+            <!-- Pattern 3: Custom Menu schedule -->
+            <div class="bg-white rounded border border-slate-200 p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="bg-purple-100 text-purple-700 text-[10px] font-bold rounded px-2 py-0.5">PATTERN 3</span>
+                <div class="font-semibold text-sm">Custom Menu active time schedule</div>
+                <span class="new-badge ml-auto">BR-11 v1.7</span>
+              </div>
+              <div class="text-xs space-y-1">
+                <div class="text-slate-600">Per sub-menu config: time range (from–to) + repeat days-of-week, no-overlap rule. QR menu chỉ hiển thị submenu active tại thời điểm khách scan.</div>
+                <div class="mt-2 bg-slate-50 rounded p-2 border border-slate-200">
+                  <div class="text-[11px] text-slate-600 mb-1">Use case spa:</div>
+                  <ul class="list-disc ml-5 text-[11px] text-slate-700">
+                    <li>Outlet đóng cửa nghỉ trưa 12:00–14:00 → menu inactive khoảng đó</li>
+                    <li>Sub-menu "Body Treatment" chỉ hoạt động buổi sáng (9:00–12:00 T2–T7)</li>
+                    <li>Sub-menu "Weekend Specials" chỉ T7, CN</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="text-[10px] text-slate-500 mt-2">ℹ Reuse 100% UI từ QR Menu Custom Menus — Phase 1 không build mới.</div>
+            </div>
+
+            <!-- Pattern 4: Promo Code -->
+            <div class="bg-white rounded border border-slate-200 p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="bg-purple-100 text-purple-700 text-[10px] font-bold rounded px-2 py-0.5">PATTERN 4</span>
+                <div class="font-semibold text-sm">Promo Code at checkout — basic</div>
+                <span class="new-badge ml-auto">BR-08 v1.7</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <div class="text-slate-500 mb-1">Khách (webapp)</div>
+                  <ul class="list-disc ml-4 text-[11px] text-slate-700">
+                    <li>Tự nhập 1 mã ở checkout (A6)</li>
+                    <li>Mã invalid (sai ký tự / hết hạn / outlet không eligible) → block Place Order + error message</li>
+                    <li>Mỗi reservation chỉ 1 mã — không cộng dồn</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="text-slate-500 mb-1">Staff (Calendar side panel)</div>
+                  <ul class="list-disc ml-4 text-[11px] text-slate-700">
+                    <li>Hiển thị info promo đã apply (giống pattern Discount POS hiện có)</li>
+                    <li>KHÔNG được re-apply / chỉnh tay sau khi tạo reservation</li>
+                    <li>Reuse màn "Configure Promotion" trên Portal FnB</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <p class="annotation mt-3 inline-block">📌 <span class="existing-badge">REUSE PATTERN</span> 4 patterns sẵn có của QR Menu — Phase 1 reuse 100% UI + logic. Lợi ích: (1) team vận hành đã quen UI, (2) effort dev minimal, (3) Spa & FnB nhất quán trên dashboard / Portal config.</p>
       </div>
 
       <!-- C4: Time Slot Resource (1 therapist = 1 row) -->
